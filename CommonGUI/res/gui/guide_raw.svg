@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2"
-     inkscape:cx="584.07801"
-     inkscape:cy="790.06655"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="332.7034"
+     inkscape:cy="719.55346"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="675"
-     inkscape:window-height="464"
-     inkscape:window-x="208"
-     inkscape:window-y="208"
+     inkscape:window-height="637"
+     inkscape:window-x="648"
+     inkscape:window-y="98"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -718,5 +718,43 @@
        width="30"
        id="30x120vscrollbar"
        style="fill:#aae8ff;fill-opacity:1;stroke:none" />
+    <g
+       id="30round"
+       inkscape:label="#g3847"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:label="#rect3058"
+         ry="9.5"
+         y="253.86218"
+         x="564.5"
+         height="30"
+         width="30"
+         id="rect3058"
+         style="fill:#a9c0c8;fill-opacity:1;stroke:none" />
+      <rect
+         style="fill:#cbd9de;fill-opacity:1;stroke:none"
+         id="rect3828"
+         width="27"
+         height="27"
+         x="566"
+         y="255.36218"
+         ry="8.5500002"
+         inkscape:label="#rect3058"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90" />
+    </g>
+    <rect
+       style="fill:#000000;fill-opacity:0.50196081;stroke:none"
+       id="10halfAlpha"
+       width="10"
+       height="10"
+       x="343"
+       y="321.36218"
+       inkscape:label="#rect3851"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
