@@ -17,7 +17,28 @@
    inkscape:version="0.48.0 r9654"
    sodipodi:docname="guide_raw.svg">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       id="linearGradient3865">
+      <stop
+         style="stop-color:#51bfff;stop-opacity:1;"
+         offset="0"
+         id="stop3867" />
+      <stop
+         style="stop-color:#513eff;stop-opacity:1"
+         offset="1"
+         id="stop3869" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3865"
+       id="linearGradient3871"
+       x1="370.875"
+       y1="322.36218"
+       x2="379.875"
+       y2="330.48718"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,16 +46,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="332.7034"
-     inkscape:cy="719.55346"
+     inkscape:zoom="4"
+     inkscape:cx="364.51061"
+     inkscape:cy="705.10664"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="675"
      inkscape:window-height="637"
-     inkscape:window-x="648"
-     inkscape:window-y="98"
+     inkscape:window-x="802"
+     inkscape:window-y="56"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -756,5 +777,15 @@
        inkscape:label="#rect3851"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:label="#rect3851"
+       y="321.36218"
+       x="370.25"
+       height="10"
+       width="10"
+       id="10gradient"
+       style="fill:url(#linearGradient3871);fill-opacity:1;stroke:none" />
   </g>
 </svg>
