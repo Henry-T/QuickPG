@@ -1,5 +1,6 @@
 
 require("config")
+require("CocosStudioDefine")
 require("framework.init")
 require("framework.shortcodes")
 require("framework.cc.init")
