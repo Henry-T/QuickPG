@@ -100,10 +100,12 @@ function ScrollGrid:ctor()
   scrollView:setInnerContainerSize(CCSize(setWidth, setHeight));
    --scrollView:scrollToTop(5000, true);
 
-  function scrollView:ccTouchBegan(CCTouch touch, CCEvent event)
+  function scrollView:ccTouchBegan(touch, event)
+    print("What!")
   end
 
-  function scrollView:touchEvent(TouchEventType type)
+  function scrollView:touchEvent(type)
+    print("What! 2")
   end
 
   --scrollView:scrollToPercentBothDirection(CCPoint(50, 50), 10, true)

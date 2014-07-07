@@ -1,0 +1,166 @@
+
+<dict>
+	cocos2d.x.version: 2.2.3
+	cocos2d.x.compiled_with_profiler: false
+	cocos2d.x.compiled_with_gl_state_cache: true
+	gl.vendor: NVIDIA Corporation
+	gl.renderer: GeForce GTX 650/PCIe/SSE2
+	gl.version: 4.4.0
+	gl.max_texture_size: 16384
+	gl.max_texture_units: 192
+	gl.supports_PVRTC: false
+	gl.supports_NPOT: true
+	gl.supports_BGRA8888: false
+	gl.supports_discard_framebuffer: false
+	gl.supports_vertex_array_object: true
+</dict>
+lua_loadChunksFromZIP() - load zip file: E:\proj\ProjectS\PicaTownMobileClient\quick-cocos2d-x\lib\framework_precompiled\framework_precompiled.zip
+lua_loadChunksFromZIP() - loaded chunks count: 108
+------------------------------------------------
+LOAD LUA FILE: E:/proj/QuickCocosPG/CommonGUI/scripts/main.lua
+------------------------------------------------
+[0.4183] [INFO] 
+[0.4186] [INFO] # DEBUG                        = 1
+[0.4189] [INFO] #
+[0.4192] [INFO] # device.platform              = windows
+[0.4195] [INFO] # device.model                 = unknown
+[0.4198] [INFO] # device.language              = cn
+[0.4202] [INFO] # device.writablePath          = E:\proj\QuickCocosPG\CommonGUI\
+[0.4207] [INFO] # device.cachePath             = E:\proj\QuickCocosPG\CommonGUI\
+[0.4212] [INFO] # device.directorySeparator    = \
+[0.4214] [INFO] # device.pathSeparator         = ;
+[0.4217] [INFO] #
+[0.4230] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_HEIGHT
+[0.4234] [INFO] # CONFIG_SCREEN_WIDTH          = 480.00
+[0.4238] [INFO] # CONFIG_SCREEN_HEIGHT         = 320.00
+[0.4241] [INFO] # display.widthInPixels        = 480.00
+[0.4248] [INFO] # display.heightInPixels       = 320.00
+[0.4252] [INFO] # display.contentScaleFactor   = 1.00
+[0.4255] [INFO] # display.width                = 480.00
+[0.4258] [INFO] # display.height               = 320.00
+[0.4261] [INFO] # display.cx                   = 240.00
+[0.4264] [INFO] # display.cy                   = 160.00
+[0.4267] [INFO] # display.left                 = 0.00
+[0.4270] [INFO] # display.right                = 480.00
+[0.4272] [INFO] # display.top                  = 320.00
+[0.4276] [INFO] # display.bottom               = 0.00
+[0.4279] [INFO] # display.c_left               = -240.00
+[0.4281] [INFO] # display.c_right              = 240.00
+[0.4284] [INFO] # display.c_top                = 160.00
+[0.4287] [INFO] # display.c_bottom             = -160.00
+[0.4290] [INFO] #
+[1.0581] value = 75.00
+[1.0604] value = 75.00
+[8.1581] value = 74.71
+[8.1761] value = 74.12
+[8.1941] value = 72.94
+[8.2121] value = 72.35
+[8.2302] value = 71.18
+[8.2482] value = 68.82
+[8.2659] value = 66.47
+[8.2833] value = 64.41
+[8.3005] value = 61.76
+[8.3193] value = 60.00
+[8.3200] value = 59.41
+[8.3372] value = 58.24
+[8.3553] value = 56.76
+[8.3733] value = 55.88
+[8.3913] value = 55.29
+[8.7407] value = 55.00
+[8.7592] value = 53.53
+[8.7613] value = 52.94
+[8.7797] value = 50.29
+[8.7993] value = 46.76
+[8.8023] value = 44.41
+[8.8223] value = 38.24
+[8.8521] value = 28.53
+[8.8723] value = 26.18
+[8.8741] value = 25.88
+[8.9123] value = 26.76
+[8.9352] value = 27.94
+[8.9365] value = 28.53
+[8.9542] value = 30.29
+[8.9732] value = 33.24
+[8.9921] value = 39.12
+[9.0101] value = 44.41
+[9.0292] value = 51.18
+[9.0472] value = 58.24
+[9.0495] value = 61.47
+[9.0686] value = 67.94
+[9.0872] value = 72.94
+[9.0884] value = 74.71
+[9.1073] value = 76.18
+[348.2806] value = 75.29
+[348.2991] value = 72.65
+[348.3179] value = 69.12
+[348.3267] value = 67.06
+[348.3478] value = 60.00
+[348.3675] value = 54.41
+[348.3690] value = 51.76
+[348.3871] value = 45.88
+[348.4053] value = 40.88
+[348.4242] value = 37.06
+[348.4256] value = 35.29
+[348.4453] value = 32.35
+[348.4633] value = 30.00
+[348.4647] value = 28.82
+[348.4833] value = 27.35
+[348.5024] value = 25.88
+[348.5204] value = 22.94
+[348.5394] value = 20.88
+[348.5574] value = 17.94
+[348.5764] value = 12.94
+[348.5951] value = 9.41
+[348.6146] value = 6.18
+[348.6326] value = 0.29
+[348.6516] value = 0.00
+[349.8625] value = 74.44
+[349.9836] value = 73.33
+[349.9850] value = 72.22
+[350.0042] value = 68.89
+[350.0227] value = 65.00
+[350.0417] value = 58.33
+[350.0598] value = 54.44
+[350.0776] value = 51.67
+[350.0957] value = 48.33
+[350.0966] value = 47.22
+[350.1148] value = 45.00
+[350.1328] value = 42.78
+[350.1508] value = 41.11
+[350.1689] value = 36.11
+[350.1872] value = 33.33
+[350.2050] value = 30.56
+[350.2223] value = 27.78
+[350.2414] value = 23.89
+[350.2601] value = 20.56
+[350.2781] value = 17.78
+[350.2971] value = 15.00
+[350.3162] value = 13.89
+[350.3343] value = 12.78
+[350.3527] value = 11.67
+[350.3549] value = 11.11
+[350.3768] value = 8.89
+[350.3976] value = 7.22
+[350.4184] value = 5.00
+[350.4373] value = 3.33
+[350.4574] value = 1.67
+[350.4754] value = 0.00
+[351.0545] value = 8.89
+[351.0742] value = 28.89
+[351.0923] value = 41.11
+[351.1127] value = 57.78
+[351.1314] value = 67.22
+[351.1497] value = 74.44
+[351.1686] value = 81.67
+[351.1881] value = 85.00
+[351.2081] value = 87.78
+[351.2099] value = 88.89
+[351.2287] value = 91.11
+[351.2477] value = 92.78
+[351.2499] value = 93.33
+[351.2685] value = 95.00
+[351.2865] value = 95.56
+[351.3055] value = 97.22
+[351.3246] value = 98.33
+[351.3426] value = 98.89
+[351.3606] value = 100.00
