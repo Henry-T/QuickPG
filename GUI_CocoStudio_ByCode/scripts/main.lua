@@ -24,4 +24,4 @@ Test_UILayout_Relative    = require "LayoutTest/Test_UILayout_Relative"
 Test_UILayout_Horizontal  = require "LayoutTest/Test_UILayout_Horizontal"
 Test_UILayout_Vertical    = require "LayoutTest/Test_UILayout_Vertical"
 
-CCDirector:sharedDirector():runWithScene(Test_UILayout_Horizontal.Create())
+CCDirector:sharedDirector():runWithScene(Test_UILayout_Vertical.Create())

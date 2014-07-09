@@ -51,9 +51,23 @@ function Test_UILayout_Vertical.Create()
   end
 
   local uiLayout = Layout:create()
+  uiLayout:setTouchEnabled(true)
   uiLayout:setBackGroundColorType(LAYOUT_COLOR_SOLID);
   uiLayout:setBackGroundColor(ccc3(128, 128, 128));
   uiLayer:addChild(uiLayout)
+
+
+    local function previousCallback(sender, eventType)
+      print("ok")
+    end
+
+    -- ## 添加一个测试按钮
+    local button = Button:create()
+    button:setTouchEnabled(true)
+    button:loadTextures("80x40button_n.png", "80x40button_d.png", "80x40button_d.png")
+    button:setPosition(CCPoint(300, 300))
+    button:addTouchEventListener(previousCallback)
+    uiLayout:add(button)
 
   return scene
 end
