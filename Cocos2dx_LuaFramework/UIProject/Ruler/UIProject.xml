@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGuidesProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GuidesProject>
+    <Project>PanelTestMailNotice</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PanelMailBox</Project>
+    <GuidesList>
+      <GuidesInfo>
+        <GuidesName>VThumb</GuidesName>
+        <GuidesPosition>-40.269317626953125</GuidesPosition>
+      </GuidesInfo>
+    </GuidesList>
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PanelMailContent</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>控件模板</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>WidgetMailBoxItem</Project>
+    <GuidesList />
+  </GuidesProject>
+  <GuidesProject>
+    <Project>PanelMailDetail</Project>
+    <GuidesList />
+  </GuidesProject>
+</ArrayOfGuidesProject>

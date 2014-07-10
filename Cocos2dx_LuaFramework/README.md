@@ -1,0 +1,1 @@
+仅采用Quick-x的lua绑定功能，使用纯cocos2d-x的API，完成游戏框架
