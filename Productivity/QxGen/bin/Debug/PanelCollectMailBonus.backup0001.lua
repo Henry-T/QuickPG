@@ -67,8 +67,8 @@ function PanelCollectMailBonus:getBonusItem(id)
     -- comins soon !
 end
 
--- QxGEN_CUSTOM_CLASS_LEVEL_BEGIN
+-- QxGEN_CLASS_LEVEL_CUSTOM_BEGIN
 -- HERE 自定义代码
--- QxGEN_CUSTOM_CLASS_LEVEL_END
+-- QxGEN_CLASS_LEVEL_CUSTOM_END
 
 return PanelCollectMailBonus

@@ -29,6 +29,8 @@ namespace QxGen
     {
         static void Main(string[] args)
         {
+            //System.Environment.CurrentDirectory = 
+
             // 载入文本模板
             string modHead = File.ReadAllText("Templete/ModHead.lua");
             string modReturn = File.ReadAllText("Templete/ModReturn.lua");
@@ -46,10 +48,9 @@ namespace QxGen
             string json_className = "PanelMissingName";
             List<ControlInfo> json_controls = new List<ControlInfo>();
 
-            // ===============
+            // ==============================
             // 读取json
-            // ===============
-
+            // ==============================
             string jsonStr = File.ReadAllText("PanelCollectMailBonus.json", Encoding.UTF8);
             // 匹配类名
             Regex regClassName = new Regex(@"Panel\w+");
@@ -105,11 +106,9 @@ namespace QxGen
             // 按类型排序
             json_controls.Sort((a, b) => { return a.Type.CompareTo(b.Type); });
 
-            // ===============
-            // 写入lua
-            // ===============
-            StreamWriter writer = File.CreateText(json_className + ".lua");
-            writer.WriteLine("-- 这是由QxGen生成的UI类\n\n");
+            // =============================
+            // 构造新lua
+            // =============================
             StringBuilder sbLuaStr = new StringBuilder();
 
             // 模块 - 信息前缀
@@ -194,7 +193,75 @@ namespace QxGen
             // 模块 - 返回
             sbLuaStr.AppendFormat(modReturn, json_className);
 
+
+            // ==============================
+            // 备份旧lua文件
+            // ==============================
+            string luaFileName = json_className + ".lua";
+            if (File.Exists(luaFileName))
+            {
+                // 备份
+                int backUpId = 1;
+                bool backUpDone = false;
+                do
+                {
+                    string backUpFile = json_className + ".backup" + backUpId.ToString("D4") + ".lua";
+                    if (File.Exists(backUpFile))
+                    {
+                        backUpId++;
+                        continue;
+                    }
+                    else
+                    {
+                        File.Copy(luaFileName, backUpFile, false);
+                        backUpDone = true;
+                    }
+                }
+                while (!backUpDone);
+            }
+
+            // ==============================
+            // 读取旧lua文件自定义脚本
+            // ==============================
+            Dictionary<string, string> CustomCodeBlock = new Dictionary<string, string>();
+            if (File.Exists(luaFileName))
+            {
+                string oldLuaStr = File.ReadAllText(luaFileName);
+                // 初始化脚本
+                string codeKeyInit = "QxGEN_CUSTOM_CLASS_INIT";
+                Regex regCustomCodeInit = new Regex("QxGEN_CUSTOM_CLASS_INIT_BEGIN/w+?/n(/s/S*)/n/w+?QxGEN_CUSTOM_CLASS_INIT_END");
+                Match matchCustomCodeInit = regCustomCodeInit.Match(oldLuaStr);
+                if(matchCustomCodeInit.Success)
+                {
+                    CustomCodeBlock.Add(codeKeyInit, matchCustomCodeInit.Groups[1].Value);
+                }
+
+                // 类级脚本
+                string codeKeyClassLvl = "QxGEN_CUSTOM_CLASS_LEVEL";
+                Regex regCustomCodeLevel = new Regex("QxGEN_CUSTOM_CLASS_LEVEL_BEGIN/w+?/n(/s/S*)/n/w+?QxGEN_CUSTOM_CLASS_LEVEL_END");
+                Match matchCustomCodeLevel = regCustomCodeLevel.Match(oldLuaStr);
+                if (matchCustomCodeLevel.Success)
+                {
+                    CustomCodeBlock.Add(codeKeyClassLvl, matchCustomCodeLevel.Groups[1].Value);
+                }
+
+                // 控件事件处理脚本
+            }
+
+            
+            // ==============================
+            // 合并旧的自定义脚本
+            // ==============================
+            // 初始化脚本
+
+            // 类级脚本
+
+            // 回调脚本
+
+
             // 写入文件
+            StreamWriter writer = File.CreateText(json_className + ".lua");
+            writer.WriteLine("-- 这是由QxGen生成的UI类\n\n");
             writer.Write(sbLuaStr.ToString());
             writer.Close();
         }
