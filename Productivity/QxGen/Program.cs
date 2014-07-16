@@ -246,6 +246,13 @@ namespace QxGen
                 }
 
                 // 控件事件处理脚本
+                Regex regCustomBtnTouch = new Regex(@"QxGEN_CUSTOM_BTN_TOUCH_BEGIN/s+?([/w.]+)/s+*/n(/s/S)/n/s+?QxGEN_CUSTOM_BTN_TOUCH_END");
+                foreach (Match match in regCustomBtnTouch.Matches(oldLuaStr))
+                {
+                    string eventName = match.Groups[1].Value;
+                    string eventBody = match.Groups[2].Value;
+                    CustomCodeBlock.Add("QxGEN_CUSTOM_BTN_TOUCH " + eventName, eventBody);
+                }
             }
 
             
