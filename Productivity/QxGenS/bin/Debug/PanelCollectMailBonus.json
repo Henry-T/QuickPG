@@ -1,0 +1,63 @@
+{
+  "classname": null,
+  "widgetTree": {
+    "className": "Panel",
+    "children": [
+      {
+        "classname": "ListView",
+        "children": [
+          {
+            "classname": "Panel",
+            "children": [
+              {
+                "classname": "ImageView",
+                "options": {
+                  "name": "imgItemIcon",
+                }
+              },
+              {
+                "classname": "Label",
+                "options": {
+                  "name": "lbCount",
+                }
+              },
+              {
+                "classname": "Button",
+                "options": {
+                  "name": "btnViewItem",
+                }
+              },
+            ],
+            "options": {
+              "name": "tplBonusItem",
+            }
+          }
+        ],
+        "options": {
+          "name": "lstBonusItem"
+        }
+      },
+      {
+        "classname": "Label",
+        "options": {
+          "name": "lbTitle",
+        }
+      },
+      {
+        "classname": "ImageView",
+        "options": {
+          "name": "imgSomeIcon",
+        }
+      },
+      {
+        "classname": "Button",
+        "options": {
+          "name": "btnOK",
+        }
+      }
+    ],
+    "options":{
+      "name": "PanelCollectMailBonus"
+    }
+  }
+}
