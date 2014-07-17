@@ -1,1 +1,1 @@
-    self.{0} = self.widget:getChildByName({0})
+    self._{0} = self:getWidgetByName("{0}")

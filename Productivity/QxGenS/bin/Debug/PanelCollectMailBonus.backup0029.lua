@@ -19,15 +19,16 @@ function PanelCollectMailBonus:ctor()
 
     self._btnOK = self:getWidgetByName("btnOK")
     self._btnOK:addTouchEventListener(function(sender, eventType)
-        -- QxGEN_CUSTOM_BTN_TOUCH_BEGIN btnOK
+        -- QxGEN_CUSTOM_BTN_CLICK_BEGIN btnOK
         if eventType == ccs.TouchEventType.ended then
+        333333
         end
-        -- QxGEN_CUSTOM_BTN_TOUCH_END btnOK
+        -- QxGEN_CUSTOM_BTN_CLICK_END btnOK
     end)
 
     self._lstBonusItem = self.widget:getChildByName("lstBonusItem")
     -- QxGEN_CUSTOM_CLASS_INIT_BEGIN
--- HERE 自定义代码 444444
+-- HERE 自定义代码 222222
 -- QxGEN_CUSTOM_CLASS_INIT_END
 end
 
@@ -55,7 +56,7 @@ function PanelCollectMailBonus:addBonusItem(data)
 end
 
 -- QxGEN_CUSTOM_CLASS_LEVEL_BEGIN
--- HERE 自定义代码 99999
+-- HERE 自定义代码 444444
 -- QxGEN_CUSTOM_CLASS_LEVEL_END
 
 function PanelCollectMailBonus:show(parent)

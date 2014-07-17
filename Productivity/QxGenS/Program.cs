@@ -221,56 +221,83 @@ namespace QxGen
             }
 
             // ==============================
-            // 读取旧lua文件自定义脚本
+            // 合并旧lua文件中的自定义脚本
             // ==============================
-            Dictionary<string, string> CustomCodeBlock = new Dictionary<string, string>();
+            // Dictionary<string, string> CustomCodeBlock = new Dictionary<string, string>();
             if (File.Exists(luaFileName))
             {
                 string oldLuaStr = File.ReadAllText(luaFileName);
                 // 初始化脚本
-                string codeKeyInit = "QxGEN_CUSTOM_CLASS_INIT";
-                Regex regCustomCodeInit = new Regex("QxGEN_CUSTOM_CLASS_INIT_BEGIN/w+?/n(/s/S*)/n/w+?QxGEN_CUSTOM_CLASS_INIT_END");
-                Match matchCustomCodeInit = regCustomCodeInit.Match(oldLuaStr);
-                if(matchCustomCodeInit.Success)
+                Regex regCustomCodeInit = new Regex(@"-- QxGEN_CUSTOM_CLASS_INIT_BEGIN\s*?\n([\s\S]*?)-- QxGEN_CUSTOM_CLASS_INIT_END");
+                Match oldCustomCodeInit = regCustomCodeInit.Match(oldLuaStr);
+                if(oldCustomCodeInit.Success)
                 {
-                    CustomCodeBlock.Add(codeKeyInit, matchCustomCodeInit.Groups[1].Value);
+                    Match newCustomCodeInit = regCustomCodeInit.Match(sbLuaStr.ToString());
+                    if (newCustomCodeInit.Success)
+                    {
+                        sbLuaStr.Remove(newCustomCodeInit.Groups[1].Index, newCustomCodeInit.Groups[1].Length);
+                        sbLuaStr.Insert(newCustomCodeInit.Groups[1].Index, oldCustomCodeInit.Groups[1].Value);
+                    }
+                    else
+                    {
+                        Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_CLASS_INIT");
+                        Console.Write(oldCustomCodeInit.Groups[1] + "\n");
+                    }
                 }
 
                 // 类级脚本
-                string codeKeyClassLvl = "QxGEN_CUSTOM_CLASS_LEVEL";
-                Regex regCustomCodeLevel = new Regex("QxGEN_CUSTOM_CLASS_LEVEL_BEGIN/w+?/n(/s/S*)/n/w+?QxGEN_CUSTOM_CLASS_LEVEL_END");
-                Match matchCustomCodeLevel = regCustomCodeLevel.Match(oldLuaStr);
-                if (matchCustomCodeLevel.Success)
+                Regex regCustomCodeLevel = new Regex(@"-- QxGEN_CUSTOM_CLASS_LEVEL_BEGIN\s*?\n([\s\S]*?)-- QxGEN_CUSTOM_CLASS_LEVEL_END");
+                Match oldCustomCodeLevel = regCustomCodeLevel.Match(oldLuaStr);
+                if (oldCustomCodeLevel.Success)
                 {
-                    CustomCodeBlock.Add(codeKeyClassLvl, matchCustomCodeLevel.Groups[1].Value);
+                    string oldStr = oldCustomCodeLevel.Groups[1].Value;
+                    Match newCustomCodeLevel = regCustomCodeLevel.Match(sbLuaStr.ToString());
+                    if (newCustomCodeLevel.Success)
+                    {
+                        string newStr = newCustomCodeLevel.Groups[1].Value;
+                        sbLuaStr.Remove(newCustomCodeLevel.Groups[1].Index, newCustomCodeLevel.Groups[1].Length);
+                        sbLuaStr.Insert(newCustomCodeLevel.Groups[1].Index, oldStr);
+                    }
+                    else
+                    {
+                        Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_CLASS_LEVEL");
+                        Console.Write(oldCustomCodeInit.Groups[1] + "\n");
+                    }
                 }
 
                 // 控件事件处理脚本
-                Regex regCustomBtnTouch = new Regex(@"QxGEN_CUSTOM_BTN_TOUCH_BEGIN/s+?([/w.]+)/s+*/n(/s/S)/n/s+?QxGEN_CUSTOM_BTN_TOUCH_END");
-                foreach (Match match in regCustomBtnTouch.Matches(oldLuaStr))
+                Regex regCustomBtnTouch = new Regex(@"-- QxGEN_CUSTOM_BTN_TOUCH_BEGIN\s+?([\w\.]+)\s*\n([\s\S]*?)-- QxGEN_CUSTOM_BTN_TOUCH_END");
+                foreach (Match oldMatch in regCustomBtnTouch.Matches(oldLuaStr))
                 {
-                    string eventName = match.Groups[1].Value;
-                    string eventBody = match.Groups[2].Value;
-                    CustomCodeBlock.Add("QxGEN_CUSTOM_BTN_TOUCH " + eventName, eventBody);
+                    string eventName = oldMatch.Groups[1].Value;
+                    string eventBody = oldMatch.Groups[2].Value;
+
+                    Regex regNewCustomBtnTouch = new Regex(@"-- QxGEN_CUSTOM_BTN_TOUCH_BEGIN\s+?"+eventName+@"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_BTN_TOUCH_END");
+                    Match newMatch = regNewCustomBtnTouch.Match(sbLuaStr.ToString());
+                    {
+                        if(newMatch.Success)
+                        {
+                            sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
+                            sbLuaStr.Insert(newMatch.Groups[1].Index, eventBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_BTN_TOUCH_BEGIN " + eventName);
+                            Console.Write(oldCustomCodeInit.Groups[1] + "\n");
+                        }
+                    }
                 }
             }
-
             
-            // ==============================
-            // 合并旧的自定义脚本
-            // ==============================
-            // 初始化脚本
-
-            // 类级脚本
-
-            // 回调脚本
-
-
+            // =================================
             // 写入文件
+            // =================================
             StreamWriter writer = File.CreateText(json_className + ".lua");
             writer.WriteLine("-- 这是由QxGen生成的UI类\n\n");
             writer.Write(sbLuaStr.ToString());
             writer.Close();
+
+            //Console.ReadKey();
         }
     }
 }
