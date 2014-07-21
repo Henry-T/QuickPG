@@ -307,7 +307,7 @@ namespace QxGen
                     else
                     {
                         Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_CLASS_LEVEL");
-                        Console.Write(oldCustomCodeInit.Groups[1] + "\n");
+                        Console.Write(oldStr + "\n");
                     }
                 }
 
@@ -318,10 +318,10 @@ namespace QxGen
                     string eventName = oldMatch.Groups[1].Value;
                     string eventBody = oldMatch.Groups[2].Value;
 
-                    Regex regNewCustomBtnTouch = new Regex(@"-- QxGEN_CUSTOM_BTN_TOUCH_BEGIN\s+?"+eventName+@"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_BTN_TOUCH_END");
+                    Regex regNewCustomBtnTouch = new Regex(@"-- QxGEN_CUSTOM_BTN_TOUCH_BEGIN\s+?" + eventName + @"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_BTN_TOUCH_END");
                     Match newMatch = regNewCustomBtnTouch.Match(sbLuaStr.ToString());
                     {
-                        if(newMatch.Success)
+                        if (newMatch.Success)
                         {
                             sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
                             sbLuaStr.Insert(newMatch.Groups[1].Index, eventBody);
@@ -329,10 +329,55 @@ namespace QxGen
                         else
                         {
                             Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_BTN_TOUCH_BEGIN " + eventName);
-                            Console.Write(oldCustomCodeInit.Groups[1] + "\n");
+                            Console.Write(eventBody + "\n");
                         }
                     }
                 }
+
+                Regex regCustomCheckBoxChange = new Regex(@"-- QxGEN_CUSTOM_CHECKBOX_CHANGE_BEGIN\s+?([\w\.]+)\s*\n([\s\S]*?)-- QxGEN_CUSTOM_CHECKBOX_CHANGE_END");
+                foreach (Match oldMatch in regCustomCheckBoxChange.Matches(oldLuaStr))
+                {
+                    string eventName = oldMatch.Groups[1].Value;
+                    string eventBody = oldMatch.Groups[2].Value;
+
+                    Regex regNewCustomCheckBoxTouch = new Regex(@"-- QxGEN_CUSTOM_CHECKBOX_CHANGE_BEGIN\s+?" + eventName + @"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_CHECKBOX_CHANGE_END");
+                    Match newMatch = regNewCustomCheckBoxTouch.Match(sbLuaStr.ToString());
+                    {
+                        if (newMatch.Success)
+                        {
+                            sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
+                            sbLuaStr.Insert(newMatch.Groups[1].Index, eventBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_CHECKBOX_CHANGE_BEGIN " + eventName);
+                            Console.Write(eventBody + "\n");
+                        }
+                    }
+                }
+
+                Regex regCustomRadioGroupChange = new Regex(@"-- QxGEN_CUSTOM_RADIOGROUP_CHANGE_BEGIN\s+?([\w\.]+)\s*\n([\s\S]*?)-- QxGEN_CUSTOM_RADIOGROUP_CHANGE_END");
+                foreach (Match oldMatch in regCustomRadioGroupChange.Matches(oldLuaStr))
+                {
+                    string eventName = oldMatch.Groups[1].Value;
+                    string eventBody = oldMatch.Groups[2].Value;
+
+                    Regex regNewCustomRadioGroupChange = new Regex(@"-- QxGEN_CUSTOM_RADIOGROUP_CHANGE_BEGIN\s+?" + eventName + @"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_RADIOGROUP_CHANGE_END");
+                    Match newMatch = regNewCustomRadioGroupChange.Match(sbLuaStr.ToString());
+                    {
+                        if (newMatch.Success)
+                        {
+                            sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
+                            sbLuaStr.Insert(newMatch.Groups[1].Index, eventBody);
+                        }
+                        else
+                        {
+                            Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_RADIOGROUP_CHANGE_BEGIN " + eventName);
+                            Console.Write(eventBody + "\n");
+                        }
+                    }
+                }
+                
             }
             
             // =================================

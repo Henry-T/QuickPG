@@ -27,23 +27,24 @@ function PanelCollectMailBonus:ctor()
 
     self._cbMusicOn = self:getWidgetByName("cbMusicOn")
     self._cbMusicOn:addEventListenerCheckBox(function(sender, eventType)
-        -- QxGEN_CUSTOM_CHECK_CHANGE_BEGIN cbMusicOn
+        -- QxGEN_CUSTOM_CHECKBOX_CHANGE_BEGIN cbMusicOn
         if eventType == ccs.CheckBoxEventType.selected then
             -- TODO 选中 ...
+            -- 我的CheckBox代码!!
         elseif eventType == ccs.CheckBoxEventType.unselected then
             -- TODO 取消 ...
         end
-        -- QxGEN_CUSTOM_CHECK_CHANGE_END cbMusicOn
+        -- QxGEN_CUSTOM_CHECKBOX_CHANGE_END cbMusicOn
     end)
 
     self._radTop_Property = self:getWidgetByName("radTop_Property")
-    self._radTop_Property:addEventListenerCheckBox(self.onRadTopChanged)
+    self._radTop_Property:addEventListenerCheckBox(self.onRadGroupTopChanged)
 
     self._radTop_Bag = self:getWidgetByName("radTop_Bag")
-    self._radTop_Bag:addEventListenerCheckBox(self.onRadTopChanged)
+    self._radTop_Bag:addEventListenerCheckBox(self.onRadGroupTopChanged)
 
     self._radTop_Team = self:getWidgetByName("radTop_Team")
-    self._radTop_Team:addEventListenerCheckBox(self.onRadTopChanged)
+    self._radTop_Team:addEventListenerCheckBox(self.onRadGroupTopChanged)
 
     self._lstBonusItem = self.widget:getChildByName("lstBonusItem")
     -- QxGEN_CUSTOM_CLASS_INIT_BEGIN
@@ -74,14 +75,14 @@ function PanelCollectMailBonus:addBonusItem(data)
     -- QxGEN_CUSTOM_LIST_ADD_END BonusItem
 end
 
-local function PanelCollectMailBonus:onRadTopChanged(sender, eventType)
-    -- QxGEN_CUSTOM_RADIO_CHANGE_BEGIN Top
+function PanelCollectMailBonus:onRadGroupTopChanged(sender, eventType)
+    -- QxGEN_CUSTOM_RADIOGROUP_CHANGE_BEGIN Top
     if eventType == ccs.CheckBoxTouchEvent.selected then
-      -- HERE 自定义选中代码
+      -- HERE 自定义选中代码 12313123
     elseif eventType == ccs.CheckBoxTouchEvent.unselected then
         -- TODO 完善 .. 对Radio Group禁用Unselect
     else
-    -- QxGEN_CUSTOM_RADIO_CHANGE_END Top
+    -- QxGEN_CUSTOM_RADIOGROUP_CHANGE_END Top
 end
 
 -- QxGEN_CUSTOM_CLASS_LEVEL_BEGIN
