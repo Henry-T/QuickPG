@@ -54,6 +54,30 @@
         "options": {
           "name": "btnOK",
         }
+      },
+      {
+        "classname": "CheckBox",
+        "options": {
+          "name": "cbMusicOn",
+        }
+      },
+      {
+        "classname": "CheckBox",
+        "options": {
+          "name": "radTop_Property",
+        }
+      },
+      {
+        "classname": "CheckBox",
+        "options": {
+          "name": "radTop_Bag",
+        }
+      },
+      {
+        "classname": "CheckBox",
+        "options": {
+          "name": "radTop_Team",
+        }
       }
     ],
     "options":{

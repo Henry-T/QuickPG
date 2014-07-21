@@ -14,6 +14,8 @@ namespace QxGen
         Label,
         Image,
         Button,
+        CheckBox,
+        Radio,
         List,
         Templete,       // 模板类型
     }
@@ -21,8 +23,9 @@ namespace QxGen
     public class ControlInfo
     {
         public string Name;
-        public EControlType Type;        // 1-Label 2-Image 3-Button
-        public string Base;     // "Top"(顶级) 或 tpl名称
+        public EControlType Type;       // 1-Label 2-Image 3-Button
+        public string Base;             // "Top"(顶级) 或 tpl名称
+        public Object Tag;              // 额外信息
     }
 
     class Program
@@ -38,7 +41,10 @@ namespace QxGen
             string modTopLabelDef = File.ReadAllText("Templete/ModTopLabelDef.lua");
             string modTopImageDef = File.ReadAllText("Templete/ModTopImageDef.lua");
             string modTopButtonDef = File.ReadAllText("Templete/ModTopButtonDef.lua");
+            string modTopCheckBoxDef = File.ReadAllText("Templete/ModTopCheckBoxDef.lua");
+            string modTopRadioDef = File.ReadAllText("Templete/ModTopRadioDef.lua");
             string modListDef = File.ReadAllText("Templete/ModListDef.lua");
+            string modRadioFunc = File.ReadAllText("Templete/ModRadioFunc.lua");
             string modListFunc = File.ReadAllText("Templete/ModListFunc.lua");
             string modSubLabelDef = File.ReadAllText("Templete/ModSubLabelDef.lua");
             string modSubImageDef = File.ReadAllText("Templete/ModSubImageDef.lua");
@@ -47,6 +53,7 @@ namespace QxGen
             // 预先定义
             string json_className = "PanelMissingName";
             List<ControlInfo> json_controls = new List<ControlInfo>();
+            List<string> json_radioGroups = new List<string>();         // RadioGroup组
 
             // ==============================
             // 读取json
@@ -61,7 +68,7 @@ namespace QxGen
             }
 
             // 匹配顶级控件
-            Regex retControl = new Regex(@"(lb|img|btn|lst|tpl)\w+");
+            Regex retControl = new Regex(@"(lb|img|btn|cb|rad|lst|tpl)\w+");
 
             foreach (Match match in retControl.Matches(jsonStr))
             {
@@ -82,11 +89,33 @@ namespace QxGen
                 {
                     ctrlInfo.Type = EControlType.Button;
                 }
+                else if (matchStr.StartsWith("cb"))
+                {
+                    ctrlInfo.Type = EControlType.CheckBox;
+                }
+                else if (matchStr.StartsWith("rad"))
+                {
+                    ctrlInfo.Type = EControlType.Radio;
+                    int pos = ctrlInfo.Name.IndexOf('_');
+                    if(pos > 0)
+                    {
+                        string groupName = ctrlInfo.Name.Substring(3, pos - 3);
+                        ctrlInfo.Tag = groupName;
+                        if(json_radioGroups.IndexOf(groupName) == -1)
+                        {
+                            json_radioGroups.Add(groupName);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("WARN Radio命名不规范，无法生成完整代码 radGroup_Item - " + ctrlInfo.Name);
+                    }
+                }
                 else if (matchStr.StartsWith("lst"))
                 {
                     ctrlInfo.Type = EControlType.List;
                 }
-                else if(matchStr.StartsWith("tpl"))
+                else if (matchStr.StartsWith("tpl"))
                 {
                     ctrlInfo.Type = EControlType.Templete;
                 }
@@ -133,6 +162,14 @@ namespace QxGen
                 {
                     sbTopCtrlDef.AppendFormat(modTopButtonDef, ctrlInfo.Name);
                 }
+                else if (ctrlInfo.Type == EControlType.CheckBox && ctrlInfo.Base == "Top")
+                {
+                    sbTopCtrlDef.AppendFormat(modTopCheckBoxDef, ctrlInfo.Name);
+                }
+                else if (ctrlInfo.Type == EControlType.Radio && ctrlInfo.Base == "Top")
+                {
+                    sbTopCtrlDef.AppendFormat(modTopRadioDef, ctrlInfo.Name, ctrlInfo.Tag);
+                }
                 else if (ctrlInfo.Type == EControlType.List)
                 {
                     string nakeName = ctrlInfo.Name.Replace("lst", "");
@@ -173,6 +210,10 @@ namespace QxGen
                         {
                             sbSubCtrlDef.AppendFormat(modSubButtonDef, nakeName, subCtrlInfo.Name);
                         }
+                        else
+                        {
+                            Console.WriteLine("不支持的List容器子控件类型: " + subCtrlInfo.Type + " " + subCtrlInfo.Name );
+                        }
                     }
 
                     // 向add函数中嵌入子控件定义
@@ -185,6 +226,11 @@ namespace QxGen
                         sbLuaStr.Insert(matchSubCtrlDef.Index + matchSubCtrlDef.Length - matchStr.Length, sbSubCtrlDef.ToString());
                     }
                 }
+            }
+
+            foreach (string radioGroup in json_radioGroups)
+            {
+                sbLuaStr.AppendFormat(modRadioFunc, json_className, radioGroup);
             }
                         
             // 模块 - 自定义类级代码
@@ -206,14 +252,14 @@ namespace QxGen
                 do
                 {
                     string backUpFile = json_className + ".backup" + backUpId.ToString("D4") + ".lua";
-                    if (File.Exists(backUpFile))
+                    if (File.Exists("backup/" + backUpFile))
                     {
                         backUpId++;
                         continue;
                     }
                     else
                     {
-                        File.Copy(luaFileName, backUpFile, false);
+                        File.Copy(luaFileName, "backup/" + backUpFile, false);
                         backUpDone = true;
                     }
                 }
@@ -297,7 +343,7 @@ namespace QxGen
             writer.Write(sbLuaStr.ToString());
             writer.Close();
 
-            //Console.ReadKey();
+            // Console.ReadKey();
         }
     }
 }

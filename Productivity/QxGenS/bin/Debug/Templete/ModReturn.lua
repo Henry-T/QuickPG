@@ -7,8 +7,8 @@ function {0}:show(parent)
 end
 
 -- QxGEN_CUSTOM_LIST_REFRESH_BEGIN {0}
+-- TODO 请将这个函数改为你自己的Panel刷新逻辑
 function {0}:refreshView()
-    -- TODO 请将这个函数改为你自己的Panel刷新逻辑
 end
 -- QxGEN_CUSTOM_LIST_REFRESH_END {0}
 
