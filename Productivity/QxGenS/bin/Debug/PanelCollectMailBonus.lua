@@ -1,7 +1,5 @@
 -- 这是由QxGen生成的UI类
 
-
-
 local PanelCollectMailBonus = class("PanelCollectMailBonus", function()
     return TouchGroup:create()
 end)
@@ -9,18 +7,15 @@ end)
 function PanelCollectMailBonus:ctor()
     self._isShowing = false
 
-    self._widget = GUIReader:shareReader():widgetFromJsonFile("PanelCollectMailBonus.json")
-    self:addWidget(self.widget)
-    
-    
-
-    self._lbTitle = self:getWidgetByName("lbTitle")
+    self._panel = GUIReader:shareReader():widgetFromJsonFile("PanelCollectMailBonus.json")
+    self:addWidget(self._panel)    self._lbTitle = self:getWidgetByName("lbTitle")
     self._imgSomeIcon = self:getWidgetByName("imgSomeIcon")
 
     self._btnOK = self:getWidgetByName("btnOK")
     self._btnOK:addTouchEventListener(function(sender, eventType)
         -- QxGEN_CUSTOM_BTN_TOUCH_BEGIN btnOK
         if eventType == ccs.TouchEventType.ended then
+            -- [LiveUpdate] 自定义的btnOK点击
         end
         -- QxGEN_CUSTOM_BTN_TOUCH_END btnOK
     end)
@@ -29,10 +24,8 @@ function PanelCollectMailBonus:ctor()
     self._cbMusicOn:addEventListenerCheckBox(function(sender, eventType)
         -- QxGEN_CUSTOM_CHECKBOX_CHANGE_BEGIN cbMusicOn
         if eventType == ccs.CheckBoxEventType.selected then
-            -- TODO 选中 ...
-            -- 我的CheckBox代码!!
+            -- [LiveUpdate] 自定义的CheckBox变更
         elseif eventType == ccs.CheckBoxEventType.unselected then
-            -- TODO 取消 ...
         end
         -- QxGEN_CUSTOM_CHECKBOX_CHANGE_END cbMusicOn
     end)
@@ -46,15 +39,16 @@ function PanelCollectMailBonus:ctor()
     self._radTop_Team = self:getWidgetByName("radTop_Team")
     self._radTop_Team:addEventListenerCheckBox(self.onRadGroupTopChanged)
 
-    self._lstBonusItem = self.widget:getChildByName("lstBonusItem")
+    self._lstBonusItem = self._panel:getChildByName("lstBonusItem")
     -- QxGEN_CUSTOM_CLASS_INIT_BEGIN
--- HERE 自定义代码 444444
--- QxGEN_CUSTOM_CLASS_INIT_END
+    -- [LiveUpdate] 自定义的初始化
+    -- QxGEN_CUSTOM_CLASS_INIT_END
 end
 
 function PanelCollectMailBonus:addBonusItem(data)
-    local widgetBonusItem = GUIReader():shareReader():widgetFromJsonFile("widgetBonusItem.json")
+    local widgetBonusItem = GUIReader:shareReader():widgetFromJsonFile("widgetBonusItem.json")
     widgetBonusItem._data = data
+    self._lstBonusItem:pushBackCustomItem(widgetBonusItem)
     
         widgetBonusItem._lbCount = UIHelper:seekWidgetByName(widgetBonusItem, "lbCount")
     widgetBonusItem._imgItemIcon = UIHelper:seekWidgetByName(widgetBonusItem, "imgItemIcon")
@@ -63,30 +57,28 @@ function PanelCollectMailBonus:addBonusItem(data)
     widgetBonusItem._btnViewItem:addTouchEventListener(function(sender, eventType)
         -- QxGEN_CUSTOM_BTN_TOUCH_BEGIN widgetBonusItem.btnViewItem
         if eventType == ccs.TouchEventType.ended then
-        
--- 这不是真的！！！ 111111
+            -- [LiveUpdate] 自定义的子按钮点击
         end
         -- QxGEN_CUSTOM_BTN_TOUCH_END widgetBonusItem.btnViewItem
     end)
 
 
     -- QxGEN_CUSTOM_LIST_ADD_BEGIN BonusItem
-    -- HERE 这里通常写数据绑定代码
+    -- [LiveUpdate] 这里通常写数据绑定代码
     -- QxGEN_CUSTOM_LIST_ADD_END BonusItem
 end
 
 function PanelCollectMailBonus:onRadGroupTopChanged(sender, eventType)
     -- QxGEN_CUSTOM_RADIOGROUP_CHANGE_BEGIN Top
     if eventType == ccs.CheckBoxTouchEvent.selected then
-      -- HERE 自定义选中代码 12313123
+        -- [LiveUpdate] 自定义的RadioGroup变更
     elseif eventType == ccs.CheckBoxTouchEvent.unselected then
-        -- TODO 完善 .. 对Radio Group禁用Unselect
     else
     -- QxGEN_CUSTOM_RADIOGROUP_CHANGE_END Top
 end
 
 -- QxGEN_CUSTOM_CLASS_LEVEL_BEGIN
--- HERE 自定义代码 99999
+-- [LiveUpdate] 自定义的类级代码
 -- QxGEN_CUSTOM_CLASS_LEVEL_END
 
 function PanelCollectMailBonus:show(parent)
@@ -97,7 +89,7 @@ function PanelCollectMailBonus:show(parent)
 end
 
 -- QxGEN_CUSTOM_LIST_REFRESH_BEGIN PanelCollectMailBonus
--- TODO 请将这个函数改为你自己的Panel刷新逻辑
+-- [LiveUpdate] 请将这个函数改为你自己的Panel刷新逻辑
 function PanelCollectMailBonus:refreshView()
 end
 -- QxGEN_CUSTOM_LIST_REFRESH_END PanelCollectMailBonus

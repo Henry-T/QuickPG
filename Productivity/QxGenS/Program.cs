@@ -32,6 +32,17 @@ namespace QxGen
     {
         static void Main(string[] args)
         {
+            string panelName = "PanelCollectMailBonus";
+
+            if (args.Length > 0)
+            {
+                FileInfo fInfo = new FileInfo(args[0]);
+                panelName = fInfo.Name.Replace(fInfo.Extension, "");
+            }
+
+            string panelJsonFile = panelName + ".json";
+            
+
             //System.Environment.CurrentDirectory = 
 
             // 载入文本模板
@@ -58,7 +69,7 @@ namespace QxGen
             // ==============================
             // 读取json
             // ==============================
-            string jsonStr = File.ReadAllText("PanelCollectMailBonus.json", Encoding.UTF8);
+            string jsonStr = File.ReadAllText(panelJsonFile, Encoding.UTF8);
             // 匹配类名
             Regex regClassName = new Regex(@"Panel\w+");
             Match matchClassName = regClassName.Match(jsonStr);
@@ -177,12 +188,13 @@ namespace QxGen
                 }
             }
 
-            Regex regTopCtrlDef = new Regex(@"-- QXGEN_TOP_CONTROL_DEFINE\s*\n");
+            Regex regTopCtrlDef = new Regex(@"\s*?-- QXGEN_TOP_CONTROL_DEFINE\s*\n");
             Match matchTopCtrlDef = regTopCtrlDef.Match(sbLuaStr.ToString());
             if (matchTopCtrlDef.Success)
             {
-                sbLuaStr.Replace("-- QXGEN_TOP_CONTROL_DEFINE", "");
-                sbLuaStr.Insert(matchTopCtrlDef.Index + matchTopCtrlDef.Length - "-- QXGEN_TOP_CONTROL_DEFINE".Length, sbTopCtrlDef.ToString());
+                sbLuaStr.Replace(matchTopCtrlDef.Value, sbTopCtrlDef.ToString());
+                // sbLuaStr.Replace("-- QXGEN_TOP_CONTROL_DEFINE", "");
+                // sbLuaStr.Insert(matchTopCtrlDef.Index + matchTopCtrlDef.Length - "-- QXGEN_TOP_CONTROL_DEFINE".Length, sbTopCtrlDef.ToString());
             }
 
             // 模块 - 容器常用功能函数
@@ -377,14 +389,59 @@ namespace QxGen
                         }
                     }
                 }
-                
+
+                // 容器项数据绑定脚本
+                Regex regCustomListAdd = new Regex(@"-- QxGEN_CUSTOM_LIST_ADD_BEGIN\s+?([\w\.]+)\s*\n([\s\S]*?)-- QxGEN_CUSTOM_LIST_ADD_END");
+                foreach (Match oldMatch in regCustomListAdd.Matches(oldLuaStr))
+                {
+                    string key = oldMatch.Groups[1].Value;
+                    string value = oldMatch.Groups[2].Value;
+
+                    Regex regNewCustomListAdd = new Regex(@"-- QxGEN_CUSTOM_LIST_ADD_BEGIN\s+?" + key + @"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_LIST_ADD_END");
+                    Match newMatch = regNewCustomListAdd.Match(sbLuaStr.ToString());
+                    {
+                        if (newMatch.Success)
+                        {
+                            sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
+                            sbLuaStr.Insert(newMatch.Groups[1].Index, value);
+                        }
+                        else
+                        {
+                            Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_LIST_ADD_BEGIN " + key);
+                            Console.Write(value + "\n");
+                        }
+                    }
+                }
+
+                // 视图刷新脚本
+                Regex regCustomListRefresh = new Regex(@"-- QxGEN_CUSTOM_LIST_REFRESH_BEGIN\s+?([\w\.]+)\s*\n([\s\S]*?)-- QxGEN_CUSTOM_LIST_REFRESH_END");
+                foreach (Match oldMatch in regCustomListRefresh.Matches(oldLuaStr))
+                {
+                    string key = oldMatch.Groups[1].Value;
+                    string value = oldMatch.Groups[2].Value;
+
+                    Regex regNewCustomListRefresh = new Regex(@"-- QxGEN_CUSTOM_LIST_REFRESH_BEGIN\s+?" + key + @"\s*\n([\s\S]*?)-- QxGEN_CUSTOM_LIST_REFRESH_END");
+                    Match newMatch = regNewCustomListRefresh.Match(sbLuaStr.ToString());
+                    {
+                        if (newMatch.Success)
+                        {
+                            sbLuaStr.Remove(newMatch.Groups[1].Index, newMatch.Groups[1].Length);
+                            sbLuaStr.Insert(newMatch.Groups[1].Index, value);
+                        }
+                        else
+                        {
+                            Console.WriteLine("警告 在新版本中找不到标记 丢弃自定义代码: QxGEN_CUSTOM_LIST_REFRESH_BEGIN " + key);
+                            Console.Write(value + "\n");
+                        }
+                    }
+                }
             }
             
             // =================================
             // 写入文件
             // =================================
             StreamWriter writer = File.CreateText(json_className + ".lua");
-            writer.WriteLine("-- 这是由QxGen生成的UI类\n\n");
+            writer.WriteLine("-- 这是由QxGen生成的UI类");
             writer.Write(sbLuaStr.ToString());
             writer.Close();
 

@@ -1,2 +1,2 @@
 
-    self._lst{0} = self.widget:getChildByName("lst{0}")
+    self._lst{0} = self._panel:getChildByName("lst{0}")

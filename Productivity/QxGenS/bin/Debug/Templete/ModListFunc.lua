@@ -1,7 +1,8 @@
 
 function {0}:add{1}(data)
-    local widget{1} = GUIReader():shareReader():widgetFromJsonFile("widget{1}.json")
+    local widget{1} = GUIReader:shareReader():widgetFromJsonFile("widget{1}.json")
     widget{1}._data = data
+    self._lst{1}:pushBackCustomItem(widget{1})
     
     -- QxGEN_SUB_CTRL_DEF {1}
 
