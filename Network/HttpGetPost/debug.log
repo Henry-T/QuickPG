@@ -1,0 +1,155 @@
+
+<dict>
+	cocos2d.x.version: quick-cocos2d-x 2.2.5
+	cocos2d.x.compiled_with_profiler: false
+	cocos2d.x.compiled_with_gl_state_cache: true
+	gl.vendor: NVIDIA Corporation
+	gl.renderer: GeForce GTX 650/PCIe/SSE2
+	gl.version: 4.4.0
+	gl.max_texture_size: 16384
+	gl.max_texture_units: 192
+	gl.supports_PVRTC: false
+	gl.supports_NPOT: true
+	gl.supports_BGRA8888: false
+	gl.supports_discard_framebuffer: false
+	gl.supports_vertex_array_object: true
+</dict>
+lua_loadChunksFromZIP() - load zip file: E:\proj\ProjectS\PicaTownMobileClient\quick-cocos2d-x\lib\framework_precompiled\framework_precompiled.zip
+lua_loadChunksFromZIP() - loaded chunks count: 108
+------------------------------------------------
+LOAD LUA FILE: E:/proj/QuickCocosPG/Network/HttpGetPost/scripts/main.lua
+------------------------------------------------
+[0.4319] [INFO] 
+[0.4321] [INFO] # DEBUG                        = 1
+[0.4324] [INFO] #
+[0.4328] [INFO] # device.platform              = windows
+[0.4330] [INFO] # device.model                 = unknown
+[0.4333] [INFO] # device.language              = cn
+[0.4336] [INFO] # device.writablePath          = E:\proj\QuickCocosPG\Network\HttpGetPost\
+[0.4341] [INFO] # device.cachePath             = E:\proj\QuickCocosPG\Network\HttpGetPost\
+[0.4346] [INFO] # device.directorySeparator    = \
+[0.4348] [INFO] # device.pathSeparator         = ;
+[0.4351] [INFO] #
+[0.4363] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
+[0.4366] [INFO] # CONFIG_SCREEN_WIDTH          = 320.00
+[0.4370] [INFO] # CONFIG_SCREEN_HEIGHT         = 213.33
+[0.4375] [INFO] # display.widthInPixels        = 480.00
+[0.4391] [INFO] # display.heightInPixels       = 320.00
+[0.4396] [INFO] # display.contentScaleFactor   = 1.50
+[0.4400] [INFO] # display.width                = 320.00
+[0.4403] [INFO] # display.height               = 213.33
+[0.4406] [INFO] # display.cx                   = 160.00
+[0.4409] [INFO] # display.cy                   = 106.67
+[0.4413] [INFO] # display.left                 = 0.00
+[0.4416] [INFO] # display.right                = 320.00
+[0.4418] [INFO] # display.top                  = 213.33
+[0.4422] [INFO] # display.bottom               = 0.00
+[0.4426] [INFO] # display.c_left               = -160.00
+[0.4429] [INFO] # display.c_right              = 160.00
+[0.4432] [INFO] # display.c_top                = 106.67
+[0.4435] [INFO] # display.c_bottom             = -106.67
+[0.4438] [INFO] #
+CCHTTPRequest[0x0001] - create request with url: http://httpbin.org/post
+[0.4696] request:getErrorCode(), request:getErrorMessage()   0  
+[0.4887] request:getErrorCode(), request:getErrorMessage()   0  
+[0.5046] request:getErrorCode(), request:getErrorMessage()   0  
+[0.5216] request:getErrorCode(), request:getErrorMessage()   0  
+[0.5389] request:getErrorCode(), request:getErrorMessage()   0  
+[0.5566] request:getErrorCode(), request:getErrorMessage()   0  
+[0.6194] request:getErrorCode(), request:getErrorMessage()   0  
+[0.6367] request:getErrorCode(), request:getErrorMessage()   0  
+[0.6536] request:getErrorCode(), request:getErrorMessage()   0  
+[0.6707] request:getErrorCode(), request:getErrorMessage()   0  
+[0.6878] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7047] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7230] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7403] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7572] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7752] request:getErrorCode(), request:getErrorMessage()   0  
+[0.7921] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8102] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8284] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8464] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8637] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8804] request:getErrorCode(), request:getErrorMessage()   0  
+[0.8974] request:getErrorCode(), request:getErrorMessage()   0  
+[0.9154] request:getErrorCode(), request:getErrorMessage()   0  
+[0.9323] request:getErrorCode(), request:getErrorMessage()   0  
+[0.9493] request:getErrorCode(), request:getErrorMessage()   0  
+[0.9831] request:getErrorCode(), request:getErrorMessage()   0  
+[0.9999] request:getErrorCode(), request:getErrorMessage()   0  
+[1.0170] request:getErrorCode(), request:getErrorMessage()   0  
+[1.0351] request:getErrorCode(), request:getErrorMessage()   0  
+[1.0521] request:getErrorCode(), request:getErrorMessage()   0  
+[1.0691] request:getErrorCode(), request:getErrorMessage()   0  
+[1.0872] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1042] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1212] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1408] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1573] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1742] request:getErrorCode(), request:getErrorMessage()   0  
+[1.1918] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2103] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2273] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2443] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2636] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2810] request:getErrorCode(), request:getErrorMessage()   0  
+[1.2977] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3141] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3319] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3479] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3659] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3820] request:getErrorCode(), request:getErrorMessage()   0  
+[1.3990] request:getErrorCode(), request:getErrorMessage()   0  
+[1.4162] request:getErrorCode(), request:getErrorMessage()   0  
+[1.4330] request:getErrorCode(), request:getErrorMessage()   0  
+[1.4509] request:getErrorCode(), request:getErrorMessage()   0  
+[1.4690] request:getErrorCode(), request:getErrorMessage()   0  
+[1.4860] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5041] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5212] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5391] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5573] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5752] request:getErrorCode(), request:getErrorMessage()   0  
+[1.5926] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6111] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6284] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6462] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6632] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6793] request:getErrorCode(), request:getErrorMessage()   0  
+[1.6963] request:getErrorCode(), request:getErrorMessage()   0  
+[1.7134] request:getErrorCode(), request:getErrorMessage()   0  
+[1.7388] request:getErrorCode(), request:getErrorMessage()   0  
+[1.7581] request:getErrorCode(), request:getErrorMessage()   0  
+[1.7752] request:getErrorCode(), request:getErrorMessage()   0  
+[1.7922] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8092] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8263] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8433] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8603] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8784] request:getErrorCode(), request:getErrorMessage()   0  
+[1.8953] request:getErrorCode(), request:getErrorMessage()   0  
+[1.9137] request:getErrorCode(), request:getErrorMessage()   0  
+[1.9306] request:getErrorCode(), request:getErrorMessage()   0  
+[1.9477] request:getErrorCode(), request:getErrorMessage()   0  
+[1.9645] {
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "key": "value"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Connection": "close", 
+    "Content-Length": "10", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org", 
+    "User-Agent": "libcurl", 
+    "X-Request-Id": "a8821084-3a58-44bd-b315-3c79da8d391f"
+  }, 
+  "json": null, 
+  "origin": "112.64.138.238", 
+  "url": "http://httpbin.org/post"
+}
+CCHTTPRequest[0x0001] - request removed
