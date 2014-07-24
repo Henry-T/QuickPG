@@ -23,5 +23,11 @@ Test_UILayout_Absolute    = require "LayoutTest/Test_UILayout_Absolute"
 Test_UILayout_Relative    = require "LayoutTest/Test_UILayout_Relative"
 Test_UILayout_Horizontal  = require "LayoutTest/Test_UILayout_Horizontal"
 Test_UILayout_Vertical    = require "LayoutTest/Test_UILayout_Vertical"
+ScrollView_Slider    = require "Container/ScrollView_Slider"
+TrimLabelTest = require "LayoutTest/TrimLabelTest"
 
-CCDirector:sharedDirector():runWithScene(Test_UILayout_Vertical.Create())
+-- CCDirector:sharedDirector():runWithScene(Test_UILayout_Vertical.Create())
+
+-- CCDirector:sharedDirector():runWithScene(ScrollView_Slider:new())
+
+CCDirector:sharedDirector():runWithScene(TrimLabelTest:new())
