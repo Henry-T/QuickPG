@@ -25,15 +25,37 @@ function TrimLabelTest:ctor()
 
     -- Label
     local label = Label:create()
-    label:setText("hello!\n111111\n222222\n333333\n444444\n555555")
+    label:ignoreContentAdaptWithSize(false)
+    label:setSize(CCSize(60,30))
+    -- label:setTextAreaSize(CCSize(30, 30))
+    --label:setSizeType(0)
+    --label:setTextHorizontalAlignment(0)
+    --label:setTextVerticalAlignment(0)
+    label:setText("hell o!111 11122 222 23333 3344 44445 55 555")
     label:setPosition(CCPoint(display.cx, display.cy))
     _uiLayer:addChild(label)
 
+    print("控件尺寸 - " .. label:getSize().width .. " " .. label:getSize().height)
+    print("文本尺寸 - " .. label:getTextAreaSize().width .. " " .. label:getTextAreaSize().height)
+    print("CCLabelTTF尺寸 - " .. label:getContentSize().width .. " " .. label:getContentSize().height)
     local size = label:getSize()
 
-    local rect = display.newRect(size.width, size.height)
+    -- 尺寸修正
+    label:getVirtualRenderer():setDimensions(CCSize(60, 150))
+
+    -- label:setSize(CCSize(60,60))
+    local newSize = CCSize(size.width, label:getContentSize().height)
+
+    label:setSize(newSize)
+
+    print("新尺寸 - " .. label:getSize().width .. " " .. label:getSize().height)
+
+    local rect = display.newRect(label:getSize().width, label:getSize().height)
     rect:setPosition(CCPoint(display.cx, display.cy))
     _uiLayer:addChild(rect)
+
+
+    -- print(label:getTextAreaSize().width)
 
     -- 创建Grid
     for i=1,12 do

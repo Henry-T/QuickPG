@@ -19,33 +19,37 @@ lua_loadChunksFromZIP() - loaded chunks count: 108
 ------------------------------------------------
 LOAD LUA FILE: E:/proj/QuickCocosPG/GUI_CocoStudio_ByCode/scripts/main.lua
 ------------------------------------------------
-[0.4809] [INFO] 
-[0.4814] [INFO] # DEBUG                        = 2
-[0.4818] [INFO] #
-[0.4824] [INFO] # device.platform              = windows
-[0.4827] [INFO] # device.model                 = unknown
-[0.4830] [INFO] # device.language              = cn
-[0.4833] [INFO] # device.writablePath          = E:\proj\QuickCocosPG\GUI_CocoStudio_ByCode\
-[0.4838] [INFO] # device.cachePath             = E:\proj\QuickCocosPG\GUI_CocoStudio_ByCode\
-[0.4843] [INFO] # device.directorySeparator    = \
-[0.4846] [INFO] # device.pathSeparator         = ;
-[0.4848] [INFO] #
-[0.4861] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_HEIGHT
-[0.4864] [INFO] # CONFIG_SCREEN_WIDTH          = 480.00
-[0.4867] [INFO] # CONFIG_SCREEN_HEIGHT         = 320.00
-[0.4870] [INFO] # display.widthInPixels        = 480.00
-[0.4875] [INFO] # display.heightInPixels       = 320.00
-[0.4881] [INFO] # display.contentScaleFactor   = 1.00
-[0.4885] [INFO] # display.width                = 480.00
-[0.4888] [INFO] # display.height               = 320.00
-[0.4891] [INFO] # display.cx                   = 240.00
-[0.4905] [INFO] # display.cy                   = 160.00
-[0.4910] [INFO] # display.left                 = 0.00
-[0.4915] [INFO] # display.right                = 480.00
-[0.4919] [INFO] # display.top                  = 320.00
-[0.4924] [INFO] # display.bottom               = 0.00
-[0.4929] [INFO] # display.c_left               = -240.00
-[0.4933] [INFO] # display.c_right              = 240.00
-[0.4938] [INFO] # display.c_top                = 160.00
-[0.4944] [INFO] # display.c_bottom             = -160.00
-[0.4948] [INFO] #
+[0.4774] [INFO] 
+[0.4777] [INFO] # DEBUG                        = 2
+[0.4780] [INFO] #
+[0.4783] [INFO] # device.platform              = windows
+[0.4786] [INFO] # device.model                 = unknown
+[0.4789] [INFO] # device.language              = cn
+[0.4792] [INFO] # device.writablePath          = E:\proj\QuickCocosPG\GUI_CocoStudio_ByCode\
+[0.4798] [INFO] # device.cachePath             = E:\proj\QuickCocosPG\GUI_CocoStudio_ByCode\
+[0.4806] [INFO] # device.directorySeparator    = \
+[0.4810] [INFO] # device.pathSeparator         = ;
+[0.4813] [INFO] #
+[0.4832] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_HEIGHT
+[0.4838] [INFO] # CONFIG_SCREEN_WIDTH          = 480.00
+[0.4841] [INFO] # CONFIG_SCREEN_HEIGHT         = 320.00
+[0.4845] [INFO] # display.widthInPixels        = 480.00
+[0.4849] [INFO] # display.heightInPixels       = 320.00
+[0.4852] [INFO] # display.contentScaleFactor   = 1.00
+[0.4855] [INFO] # display.width                = 480.00
+[0.4860] [INFO] # display.height               = 320.00
+[0.4867] [INFO] # display.cx                   = 240.00
+[0.4872] [INFO] # display.cy                   = 160.00
+[0.4875] [INFO] # display.left                 = 0.00
+[0.4878] [INFO] # display.right                = 480.00
+[0.4882] [INFO] # display.top                  = 320.00
+[0.4886] [INFO] # display.bottom               = 0.00
+[0.4889] [INFO] # display.c_left               = -240.00
+[0.4892] [INFO] # display.c_right              = 240.00
+[0.4895] [INFO] # display.c_top                = 160.00
+[0.4898] [INFO] # display.c_bottom             = -160.00
+[0.4901] [INFO] #
+[0.5014] 控件尺寸 - 60 30
+[0.5018] 文本尺寸 - 60 30
+[0.5023] CCLabelTTF尺寸 - 62 32
+[0.5061] 新尺寸 - 60 152
