@@ -1,0 +1,3 @@
+这不是一个代码项目，而是CocosStudio编辑器到类属性的对照表。
+
+TODO 合并进ControlByCode

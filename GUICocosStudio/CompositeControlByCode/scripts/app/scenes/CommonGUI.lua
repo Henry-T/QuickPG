@@ -38,7 +38,7 @@ function CommonGUI:ctor()
   -- ## 创建CocoStudio GUI容器
 
   -- ## !!! TouchGroup我暂时拿不到，先用普通节点做容器 暂未返现问题
-  local _uiLayer = TouchGroup.create()
+  local _uiLayer = TouchGroup:create()
 
   --self._uiLayer = CCNode:create()
   self:addChild(self._uiLayer)
