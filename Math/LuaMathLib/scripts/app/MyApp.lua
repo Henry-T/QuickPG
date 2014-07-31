@@ -1,12 +1,12 @@
 
 require("config")
 require("framework.init")
-require("MathLib.bit")
-Math = require("MathLib.Math")
-Vector2 = require("MathLib.Vector2")
-Vector3 = require("MathLib.Vector3")
-Quaternion = require("MathLib.Quaternion")
-Matrix = require("MathLib.Matrix")
+require("LuaMathLib.bit")
+Math = require("LuaMathLib.Math")
+Vector2 = require("LuaMathLib.Vector2")
+--Vector3 = require("LuaMathLib.Vector3")
+Quaternion = require("LuaMathLib.Quaternion")
+--Matrix = require("LuaMathLib.Matrix")
 
 require("MathTest.MathTest")
 

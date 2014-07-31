@@ -14,13 +14,14 @@ function MainScene:ctor()
 end
 
 function MainScene:onEnter()
+    -- NOTE SmoothDamp测试
     self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)
         --self._posX = self._label:getPositionX()
         --self._posX, self._vX = Math.SmoothDamp(self._posX, 300, self._vX, 1, 1000, dt)
         --self._label:setPosition(self._posX, self._label:getPositionY())
 
         self._rot = self._label:getRotation()
-        self._rot, self._vX = Math.SmoothDampAngle(self._rot, 180, self._vX, 1, 1000, dt)
+        self._rot, self._vX = Math.SmoothDamp(self._rot, 720, self._vX, 1, 1000, dt)
         self._label:setRotation(self._rot)
     end)
     self:scheduleUpdate()
