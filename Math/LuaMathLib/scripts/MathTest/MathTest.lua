@@ -3,7 +3,6 @@
 -- Date: 2014-07-30 10:53:05
 --
 
-
 -- Math.Approximately
 print("浮点数比较: " .. tostring(1 == 10/10))
 print("浮点数近似: " .. tostring(Math.Approximately(1, 10/10)))
@@ -25,6 +24,23 @@ print("符号: -999 " .. tostring(Math.Sign(-999)))
 --local matrix = Matrix:new()
 --matrix.X = 100
 --print(matrix.X)
+
+
+--[[
+-- # 基础测试 meta中的__index与函数是否冲突?
+local ClassMeta = {}
+
+ClassMeta.__index = ClassMeta
+
+function ClassMeta:ctor()
+    print("ctor")
+end
+
+local instance = {}
+setmetatable(instance, ClassMeta)
+instance:ctor()
+
+--]]
 
 
 --[[
@@ -62,36 +78,83 @@ print(instance.testMember)
 
 
 
+--[[
 -- # Quick-x实现
-local MyClass = class("MyClass", function() return display.newSprite() end)
+-- ## 修改过Quick-x的framework可以实现
+--  
+--  function cls.new(...)
+--     local instance = setmetatable({}, cls)
+--     for i, v in pairs(cls) do
+--         instance[i] = v
+--     end
+--     instance.class = cls
+--     instance:ctor(...)
+--     return instance
+--  end
+--
+Sprite = class("Sprite")
 
-function MyClass:ctor()
-    print("构造")
+function Sprite:ctor(imageSize)
+    self._imageSize = imageSize
+    self._scale = 1
+    self._name = ""
+    self._x = 0
 end
 
-function MyClass:__newindex( index, value )
-    if index == "testMember" then
-        self.members[index] = value
-        print( "Set member " .. index .. " to " .. value )
+function Sprite:__newindex( index, value )
+    if index == "Name" then
+        print("internal - 设置了新的名称: " .. value)
+        rawset(self, "_name", value)
+    elseif index == "Size" then
+        local newScale = value / self._imageSize
+        rawset(self, "_scale", newScale)
+    elseif index == "Scale" then
+        print("internal - 设置Scale: " .. value)
+        rawset(self, "_scale", value)
+    elseif index == 1 then
+        rawset(self, "_x", value)
     else
-        rawset( self, index, value )
+        rawset(self, index, value)
     end
 end
 
-function MyClass:__index( index )
-    if index == "testMember" then
-        print( "Getting " .. index )
-        return self.members[index]
+function Sprite:__index( index )
+    if index == "Name" then
+        local name = rawget(self, "_name")
+        print("internal - 读取名称: ".. name)
+        return name
+    elseif index == "Size" then
+        local scale = rawget(self, "_scale")
+        return scale * self._imageSize
+    elseif index == "Scale" then
+        return rawget( self, "_scale")
+    elseif index == 1 then
+        return rawget( self, "_x")
     else
-        return rawget( self, index )
+        return rawget( self, index)
     end
 end
 
-local instance = MyClass.new()
-instance.testMember = 100
-print(instance.testMember)
+function Sprite:draw()
+    print("绘制了一张精灵: ")
+    print("Name : " .. self.Name)
+    print("Size : " .. self.Size)
+    print("Scale: " .. self._scale)
+end
+
+local sprite = Sprite.new(100)
+sprite.Name = "背景图片"
+sprite.Size = 1000
+sprite:draw()
+
+sprite.Scale = 0.1
+sprite:draw()
+
+sprite[1] = 99.99
+print(sprite[1])
 
 print("测试结束")
+--]]
 
 --[[
 -- # Codea的实现
@@ -113,6 +176,14 @@ function Class(base)
     local mt = {}
     mt.__call = function(class_tbl, ...)
         local obj = {}
+
+        -- 改进 Begin
+        for i, v in pairs(class_tbl) do
+            obj[i] = v
+        end
+
+        -- 改进 End
+
         setmetatable(obj,c)
         if class_tbl.init then
             class_tbl.init(obj,...)
@@ -122,7 +193,7 @@ function Class(base)
                 base.init(obj, ...)
             end
         end
-        
+
         return obj
     end
 
@@ -146,6 +217,7 @@ MyClass = Class()
 function MyClass:init()
     -- We'll store members in an internal table
     self.members = {}
+    print("init!")
 end
 
 function MyClass:__newindex( index, value )
@@ -166,12 +238,18 @@ function MyClass:__index( index )
     end
 end
 
+function MyClass:Foo()
+    print("foo! " .. self.testMember)
+end
 
 local foo = MyClass()
 
-    foo.testMember = 5
-    foo.testMember = 2
+foo.testMember = 5
+foo.testMember = 2
 
-    print( foo.testMember )
+print( foo.testMember )
+-- MyClass.Foo(foo)
+foo:Foo()
+
 
 --]]

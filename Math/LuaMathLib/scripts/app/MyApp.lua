@@ -2,9 +2,11 @@
 require("config")
 require("framework.init")
 require("LuaMathLib.bit")
+
+require("LuaMathLib.class")      -- 修改class定义使其支持getter/setter/indexer
 Math = require("LuaMathLib.Math")
-Vector2 = require("LuaMathLib.Vector2")
---Vector3 = require("LuaMathLib.Vector3")
+--Vector2 = require("LuaMathLib.Vector2")
+Vector3 = require("LuaMathLib.Vector3")
 Quaternion = require("LuaMathLib.Quaternion")
 --Matrix = require("LuaMathLib.Matrix")
 
