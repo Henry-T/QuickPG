@@ -6,14 +6,16 @@
 local Math = {}
 
 --- 角度转弧度系数
-Math.Deg2Rad = 3.14159265358979 / 180
+Math.Deg2Rad = 0.0174532924
+
+Math.Rad2Deg = 57.29578
 
 --- float精度的极小数
 -- TODO 确认Unity平台下的值，在lua下是否正确
 Math.Epsilon = 1.401298E-45
 
 --- PI
-Math.PI = 3.14159265358979
+Math.PI = 3.14159274
 
 ---  弧度转角度系数
 Math.Rad2Deg = 180 / 3.14159265358979
@@ -273,19 +275,19 @@ end
 ---  Gradually changes a value towards a desired goal over time.
 function Math.SmoothDamp(current, target, currentVelocity, smoothTime, maxSpeed, deltaTime)
     smoothTime = Math.Max(0.0001, smoothTime)
-    local inverseBy2 = 2 / smoothTime
-    local percentBy2 = inverseBy2 * deltaTime
-    local factorA = 1 / (1 + percentBy2 + 0.48 * percentBy2 * percentBy2 + 0.235 * percentBy2 * percentBy2 * percentBy2)
-    local distance = current - target
+    local inverseTTBy2 = 4 / smoothTime       -- NOTE Unity中分子为2 但改为4才正确，原因不明
+    local percentX2 = inverseTTBy2 * deltaTime
+    local factorA = 1 / (1 + percentX2 + 0.48 * percentX2 * percentX2 + 0.235 * percentX2 * percentX2 * percentX2)
+    local distanceVV = current - target
     local maxMove = maxSpeed * smoothTime
-    distance = Math.Clamp (distance, -maxMove, maxMove)
-    target = current - distance
-    local deltaV = (currentVelocity + inverseBy2 * distance) * deltaTime
-    currentVelocity = (currentVelocity - inverseBy2 * deltaV) * factorA
-    local newCur = target + (distance + deltaV) * factorA
-    if (target - current > 0) == (newCur > target) then
-        newCur = target;
-        currentVelocity = (newCur - target) / deltaTime;
+    distanceVV = Math.Clamp (distanceVV, -maxMove, maxMove)
+    local fixTarget = current - distanceVV
+    local dDis = (currentVelocity + inverseTTBy2 * distanceVV) * deltaTime
+    currentVelocity = (currentVelocity - inverseTTBy2 * dDis) * factorA
+    local newCur = fixTarget + (distanceVV + dDis) * factorA
+    if (fixTarget > current) == (newCur > fixTarget) then
+        newCur = fixTarget
+        currentVelocity = (newCur - fixTarget) / deltaTime;
     end
     return newCur, currentVelocity;
 end
