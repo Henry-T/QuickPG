@@ -21,7 +21,7 @@ function MainScene:onEnter()
         --self._label:setPosition(self._posX, self._label:getPositionY())
 
         self._rot = self._label:getRotation()
-        self._rot, self._vX = Math.SmoothDamp(self._rot, 720, self._vX, 1, 1000, dt)
+        self._rot, self._vX = Math.SmoothDamp(self._rot, 7200, self._vX, 5, 1000, dt)
         self._label:setRotation(self._rot)
     end)
     self:scheduleUpdate()

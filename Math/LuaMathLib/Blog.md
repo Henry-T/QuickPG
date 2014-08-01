@@ -17,3 +17,7 @@
 **带加速的SmoothDamp**
 去做个抽奖转盘吧~ So Easy ^_^
 
+
+getter/setter 非常适合用做数据类
+
+吐血吐血吐血吐血。。。。。。

@@ -5,12 +5,36 @@ require("LuaMathLib.bit")
 
 require("LuaMathLib.class")      -- 修改class定义使其支持getter/setter/indexer
 Math = require("LuaMathLib.Math")
---Vector2 = require("LuaMathLib.Vector2")
+Vector2 = require("LuaMathLib.Vector2")
 Vector3 = require("LuaMathLib.Vector3")
+Vector4 = require("LuaMathLib.Vector4")
 Quaternion = require("LuaMathLib.Quaternion")
---Matrix = require("LuaMathLib.Matrix")
+Matrix = require("LuaMathLib.Matrix4x4")
 
+print("=============================")
+print("Math测试")
+print("=============================")
 require("MathTest.MathTest")
+print("\n")
+
+print("=============================")
+print("Vector3测试")
+print("=============================")
+require("MathTest.Vector3Test")
+print("\n")
+
+print("=============================")
+print("Quaternion测试")
+print("=============================")
+require("MathTest.QuaternionTest")
+print("\n")
+
+print("=============================")
+print("Matrix测试")
+print("=============================")
+require("MathTest.MatrixTest")
+print("\n")
+
 
 local MyApp = class("MyApp", cc.mvc.AppBase)
 

@@ -5,23 +5,26 @@
 
 local Math = {}
 
---- 角度转弧度系数
-Math.Deg2Rad = 0.0174532924
-
-Math.Rad2Deg = 57.29578
-
---- float精度的极小数
--- TODO 确认Unity平台下的值，在lua下是否正确
-Math.Epsilon = 1.401298E-45
-
+--- [[常量]]
 --- PI
 Math.PI = 3.14159274
 
----  弧度转角度系数
-Math.Rad2Deg = 180 / 3.14159265358979
+--- 角度转弧度系数
+Math.Deg2Rad = 0.0174532924
 
+--- 弧度转角度系数
+Math.Rad2Deg = 57.29578
 
---- 去绝对值
+--- 极小数,自然对数底
+Math.Epsilon = math.exp(1)      --指数为1时返回值就是e
+
+--- 正无穷
+Math.Infinity = math.huge
+
+--- 负无穷
+Math.NegativeInfinity = -math.huge
+
+--- 取绝对值
 function Math.Abs(num)
     if num > 0 then
         return num
@@ -30,14 +33,15 @@ function Math.Abs(num)
     end
 end
 
----  Returns the arc-cosine of f - the angle in radians whose cosine is f.
-function Math.Acos(cosOfRad)
-    return math.acos(cosOfRad)
-end
-
---- 两个浮点数近似相等
+--- 是否近似相等
 function Math.Approximately(a, b)
     return Math.Abs (b - a) < Math.Max (1E-06 * Math.Max (Math.Abs (a), Math.Abs (b)), 1.121039E-44);
+end
+
+--- [[三角函数]]
+--- Cos
+function Math.Cos(rad)
+    return math.cos(rad)
 end
 
 ---  Returns the arc-sine of f - the angle in radians whose sine is f.
@@ -45,17 +49,22 @@ function Math.Asin(sinOfRad)
     return math.asin(sinOfRad)
 end
 
----  Returns the arc-tangent of f - the angle in radians whose tangent is f.
+--- 反余弦获得弧度
+function Math.Acos(cosOfRad)
+    return math.acos(cosOfRad)
+end
+
+--- 反正切获得弧度
 function Math.Atan(tanOfRad)
     return math.atan(tanOfRad)
 end
 
---- Returns the angle in radians whose Tan is y/x.
+--- 反正切获得弧度
 function Math.Atan2(x, y)
     return math.atan2(y/x)
 end
 
----  Returns the smallest integer greater to or equal to f.
+--- 大于参数的最小整数
 function Math.Ceil(num)
     return math.ceil(num)
 end
@@ -81,8 +90,8 @@ function Math.Clamp01(num)
 end
 
 --- 最近的2的幂
--- 参考: Lua中number边界讨论 http://bbs.csdn.net/topics/390560771?page=1#post-395384266
 function Math.ClosestPowerOfTwo(num)
+    -- 参考: Lua中number边界讨论 http://bbs.csdn.net/topics/390560771?page=1#post-395384266
     local index = 0
     for i=index, 53 do
         if num < 2^i then
@@ -104,11 +113,6 @@ function Math.ClosestPowerOfTwo(num)
     end
 end
 
---- Cos
-function Math.Cos(rad)
-    return math.cos(rad)
-end
-
 --- 计算初始角到目标角的最小差值
 function Math.DeltaAngle(current, target)
     local num = Math.Repeat(target - current, 360)
@@ -128,7 +132,7 @@ function Math.Floor(num)
     return math.floor(num)
 end
 
----  Converts the given value from gamma to linear color space.
+--- Converts the given value from gamma to linear color space.
 function Math.GammaToLinearSpace()
     return 0
 end
@@ -219,7 +223,7 @@ function Math.MoveTowardsAngle(current, target, maxDelta)
     return Math.MoveTowards(current, target, maxDelta)
 end
 
----  Returns the next power of two value.
+--- 大于参数的最小2的幂
 function Math.NextPowerOfTwo(num)
     -- https://github.com/kirilligum/dsalgo-1/blob/master/NextPowerOfTwo.java
     local result = 1;
@@ -235,7 +239,7 @@ function Math.PerlinNoise()
     -- TODO 生成噪点值
 end
 
----  PingPongs the value t, so that it is never larger than length and never smaller than 0.
+--- PingPongs the value t, so that it is never larger than length and never smaller than 0.
 function Math.PingPong(t, length)
     t = Math.Repeat(t, length * 2)
     return length - Math.Abs(t-length)
