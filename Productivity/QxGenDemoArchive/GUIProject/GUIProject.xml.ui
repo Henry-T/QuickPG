@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>E:\proj\QuickCocosPG\Productivity\QxGenDemoArchive\GUIProject</ProjectDir>
+  <Version>1.5.0.1</Version>
+  <Resources>E:\proj\QuickCocosPG\Productivity\QxGenDemoArchive\GUIProject\Resources</Resources>
+  <Name>GUIProject</Name>
+  <JsonFileName>GUIProject.json</JsonFileName>
+  <JsonFolder>E:\proj\QuickCocosPG\Productivity\QxGenDemoArchive\GUIProject\Json</JsonFolder>
+  <JsonList>
+    <string>PanelA.json</string>
+    <string>PanelB.json</string>
+    <string>widgetLog.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>0</Width>
+    <Height>0</Height>
+  </CanvasSize>
+  <filePath>E:\proj\QuickCocosPG\Productivity\QxGenDemoArchive\GUIProject\GUIProject.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath />
+  <imageFileList />
+  <imagePngList>
+    <string>gui/30radio_off.png</string>
+    <string>gui/80x40button_n.png</string>
+    <string>gui/80x40button_d.png</string>
+    <string>gui/80x40button_dis.png</string>
+    <string>gui/30radio_off.png</string>
+    <string>gui/80x40button_n.png</string>
+    <string>gui/80x40button_d.png</string>
+    <string>gui/80x40button_dis.png</string>
+    <string>gui/30check_off.png</string>
+    <string>gui/30radio_dis.png</string>
+    <string>gui/30check_on.png</string>
+    <string>gui/30radio_on.png</string>
+    <string>gui/30round.png</string>
+    <string>gui/120x30hscrollbar.png</string>
+    <string>GUI/slider_bar_button.png</string>
+    <string>gui/30round.png</string>
+  </imagePngList>
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>PanelA.json</CurrentUIJson>
+</UIProject>
