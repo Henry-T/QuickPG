@@ -32,10 +32,12 @@ function Vector2:__index(index)
         return Math.Sqrt(self.x * self.x + self.y * self.y)
     elseif index == "normalized" then
         local result = Vector2.new (self.x, self.y);
-        result.Normalize ();
+        result:Normalize ();
         return result;
     elseif index == "sqrMagnitude" then
         return self.x * self.x + self.y * self.y;
+    else
+        return rawget(self, index)
     end
 end
 
@@ -44,6 +46,8 @@ function Vector2:__newindex(index, value)
         self.x = value
     elseif index == 1 then
         self.y = value
+    else
+        rawset(self, index, value)
     end
 end
 
@@ -94,12 +98,29 @@ function Vector2.MoveTowards (current, target, maxDistanceDelta)
     return current + a / magnitude * maxDistanceDelta;
 end
 
-function Vector2.Scale (a, b)
-    return Vector2.new (a.x * b.x, a.y * b.y);
+-- mod 为true表示修改a, 否则创建并返回一个新的Vector2
+function Vector2.Scale (a, b, mod)
+    if type(b) == "number" then
+        if mod then
+            a.x = a.x * b
+            a.y = a.y * b
+            return a
+        else
+            return Vector2.new(a.x * b, a.y * b)
+        end
+    else
+        if mod then
+            a.x = a.x * b.x
+            a.y = a.y * b.y
+            return a
+        else
+            return Vector2.new(a.x * b.x, a.y * b.y)
+        end
+    end
 end
 
 function Vector2.SqrMagnitude (a)
-    return a.x * a.x + a.y * a.y;
+    
 end
 
 --- [[Methods]]
@@ -107,7 +128,7 @@ function Vector2:Equals (other)
     if other.__cname ~= "Vector2" then
         return false
     end
-    return self.x == vector.x and self.y == vector.y;
+    return self.x == other.x and self.y == other.y;
 end
 
 -- public override int GetHashCode ()
@@ -124,11 +145,6 @@ function Vector2:Normalize ()
     end
 end
 
-function Vector2:Scale (scale)
-    self.x = self.x * scale.x;
-    self.y = self.y * scale.y;
-end
-
 function Vector2:Set (new_x,  new_y)
     self.x = new_x;
     self.y = new_y;
@@ -139,7 +155,7 @@ function Vector2:__tostring()
     return string.format("(%.2f, %.2f)", self.x, self.y)
 end
 
-function Vector2:__concat(a, b)
+function Vector2.__concat(a, b)
     return tostring(a)..tostring(b)
 end
 
@@ -164,7 +180,7 @@ function Vector2.__mul(a, b)
     if type(a) == "number" then
         return Vector2.new(a * b.x, a * b.y)
     else
-        return Vector2.new(a.x * d, a.y * d)
+        return Vector2.new(a.x * b, a.y * b)
     end
 end
 

@@ -191,7 +191,6 @@ function Vector3.SqrMagnitude(a)
 end
 
 function Vector3:Equals (other)
-    print("toLua类 "..other.__cname)
     if other.__cname ~= "Vector3" then
         return false;
     end

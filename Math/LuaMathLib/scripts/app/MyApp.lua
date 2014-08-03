@@ -24,15 +24,27 @@ require("MathTest.Vector3Test")
 print("\n")
 
 print("=============================")
+print("Vector2测试")
+print("=============================")
+require("MathTest.Vector2Test")
+print("\n")
+
+print("=============================")
+print("Vector4测试")
+print("=============================")
+-- require("MathTest.Vector4Test")
+print("\n")
+
+print("=============================")
 print("Quaternion测试")
 print("=============================")
-require("MathTest.QuaternionTest")
+-- require("MathTest.QuaternionTest")
 print("\n")
 
 print("=============================")
 print("Matrix测试")
 print("=============================")
-require("MathTest.MatrixTest")
+-- require("MathTest.MatrixTest")
 print("\n")
 
 

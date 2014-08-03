@@ -17,7 +17,7 @@ function class(classname, super)
 
     if superType == "function" or (super and super.__ctype == 1) then
         -- inherited from native C++ Object
-        print("inherite from c++")
+        --print("inherite from c++")
         cls = {}
 
         if superType == "table" then
@@ -43,7 +43,7 @@ function class(classname, super)
         end
 
     else
-        print("inherite from lua")
+        --print("inherite from lua")
         -- inherited from Lua Object
         if super then
             cls = {}
@@ -60,11 +60,13 @@ function class(classname, super)
         function cls.new(...)
             local instance = setmetatable({}, cls)
 
+            -- dump(cls)
             for i, v in pairs(cls) do
                 instance[i] = v
             end
 
-            instance.class = cls
+            --instance.class = cls
+            -- dump(instance)
             instance:ctor(...)
             return instance
         end
