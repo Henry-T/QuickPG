@@ -10,16 +10,14 @@
     <string>PanelMax.json</string>
   </JsonList>
   <CanvasSize>
-    <Width>0</Width>
-    <Height>0</Height>
+    <Width>960</Width>
+    <Height>640</Height>
   </CanvasSize>
   <filePath>E:\proj\QuickXPG\Resolution\FitScreenGUI_Simple\UIProj\UIProj.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
-  <imagePngList>
-    <string>30round_tint.png</string>
-  </imagePngList>
+  <imagePngList />
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>PanelMax.json</CurrentUIJson>
+  <CurrentUIJson />
 </UIProject>
