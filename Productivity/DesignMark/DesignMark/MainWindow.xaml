@@ -1,0 +1,16 @@
+﻿<Window x:Class="DesignMark.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UI标记工具" Height="465.611" Width="718.103" Initialized="Window_Initialized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="233*"/>
+            <ColumnDefinition Width="477*"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="imgRef" HorizontalAlignment="Center" Height="322" Margin="23,10,203,103" Width="484" Stretch="None" Source="邮箱界面2.jpg" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+        <TreeView x:Name="trvWidgetTree" Grid.Column="1" HorizontalAlignment="Left" Height="425" Margin="309,0,0,0" VerticalAlignment="Top" Width="168">
+            <Button Content="13132123123"/>
+        </TreeView>
+        <Canvas x:Name="cvsEditArea" HorizontalAlignment="Left" Height="322" Margin="23,10,0,0" VerticalAlignment="Top" Width="484" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
