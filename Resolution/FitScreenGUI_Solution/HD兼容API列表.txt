@@ -1,0 +1,25 @@
+**HD 兼容列表**
+图片/伴生资源
+display.newSprite(filename, x, y, params)
+display.newScale9Sprite(filename, x, y, size)
+display.newTilesSprite(filename, rect)
+display.newTiledBatchNode(filename, plistFile, size, hPadding, vPadding)
+display.newMaskedSprite(__mask, __pic)    ---- 处理图片之后返回的是CCSprite, 确认scale
+display.newFilteredSprite(filename, filters, params)
+display.newGraySprite(filename, params)
+
+display.addImageAsync(imagePath, callback)
+display.addSpriteFramesWithFile(plistFilename, image, handler)
+display.removeSpriteFramesWithFile(plistFilename, imageName)
+display.setTexturePixelFormat(filename, format)
+display.removeSpriteFrameByImageName(imageName)
+display.newBatchNode(image, capacity)
+display.newSpriteFrame(frameName)
+display.newFrames(pattern, begin, length, isReversed)  -- 在pattern前面加
+
+**属性**
+Node.scale(scale)
+Caps
+
+
+TODO setContentSize 如何影响一张图片的尺寸 ???
