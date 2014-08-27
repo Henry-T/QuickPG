@@ -33,6 +33,10 @@ AnchorPoint可以完全不用理会,因为它按照百分比
 SD/HD 对其他代码来说是透明的
 打包时的资源过滤
 
+**操作规定**
+任何Sprite级别的Node，都不应用做容器
+你有两种方法忽略自动资源选择-- TurnOff或者直接调用Cocos2d的API
+
 **参考**
 http://blog.csdn.net/andy_quan/article/details/27201383
 这里有提到HD/SD使用同一套素材的情况，现在手机分辨率都接近Retina了
@@ -41,4 +45,21 @@ http://blog.csdn.net/andy_quan/article/details/27201383
 **其他问题**
 TODO 检查素材尺寸不同的 LabelAtlas及LabelBMFont 在两种模式下的差异
 (在Cocos2d简易UI系统中，他们仅为图片，没有字号概念，那么应当与Sprite相同)
+
+**如何制作素材**
+素材制作时有一个参考高度，以及最小-最大宽度
+SD下，素材高度限定为640
+HD下，素材高度限定为1280
+
+**限制**
+图片不要用作容器，图片自己的scale会影响到子级
+
+**TODO**
+TODO 支持BMFont双尺寸
+TODO 支持LabelAtlas做成双尺寸
+
+
+**备注**
+getContentSize和setContentSize ContentSize指的是不受变换影响的绝对尺寸, 各种Node应该对此做出不同的响应。像CCSprite，通过setTextureCoords(改变顶点位置)使其具有了实际意义
+TODO 确认Node的ContentSize如何受子元素以及上层变换影响
 

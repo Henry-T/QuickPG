@@ -1,4 +1,6 @@
 
+local UIScrollView = import(".UIScrollView")
+
 local UIListViewItem = class("UIListViewItem", function()
 	return cc.Node:create()
 end)
@@ -12,6 +14,7 @@ UIListViewItem.ID_COUNTER = 0
 function UIListViewItem:ctor(item)
 	self.width = 0
 	self.height = 0
+	self.margin_ = {left = 0, right = 0, top = 0, bottom = 0}
 	UIListViewItem.ID_COUNTER = UIListViewItem.ID_COUNTER + 1
 	self.id = UIListViewItem.ID_COUNTER
 	self:setTag(self.id)
@@ -30,17 +33,27 @@ function UIListViewItem:getContent()
 	return self:getChildByTag(UIListViewItem.CONTENT_TAG)
 end
 
-function UIListViewItem:setItemSize(w, h)
+function UIListViewItem:setItemSize(w, h, bNoMargin)
+	if not bNoMargin then
+		if UIScrollView.DIRECTION_VERTICAL == self.lvDirection_ then
+			h = h + self.margin_.top + self.margin_.bottom
+		else
+			w = w + self.margin_.left + self.margin_.right
+		end
+	end
+
+	print("htl item size:" .. w .. h)
+
 	local oldSize = {width = self.width, height = self.height}
 	local newSize = {width = w, height = h}
 
 	self.width = w or 0
 	self.height = h or 0
-	self:setContentSize(CCSizeMake(w, h))
+	self:setContentSize(CCSize(w, h))
 
 	local bg = self:getChildByTag(UIListViewItem.BG_TAG)
 	if bg then
-		bg:setContentSize(CCSizeMake(w, h))
+		bg:setContentSize(CCSize(w, h))
 		bg:setPosition(cc.p(w/2, h/2))
 	end
 
@@ -49,6 +62,16 @@ end
 
 function UIListViewItem:getItemSize()
 	return self.width, self.height
+end
+
+function UIListViewItem:setMargin(margin)
+	self.margin_ = margin
+
+	-- dump(self.margin_, "set margin:")
+end
+
+function UIListViewItem:getMargin()
+	return self.margin_
 end
 
 function UIListViewItem:setBg(bg)
@@ -62,6 +85,11 @@ function UIListViewItem:onSizeChange(listener)
 	self.listener = listener
 
 	return self
+end
+
+-- just for listview invoke
+function UIListViewItem:setDirction(dir)
+	self.lvDirection_ = dir
 end
 
 return UIListViewItem

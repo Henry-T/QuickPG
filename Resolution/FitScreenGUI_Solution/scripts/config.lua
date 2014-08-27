@@ -31,6 +31,7 @@ CONFIG_SCREEN_AUTOSCALE_CALLBACK = function(w, h, deviceModel)
         HD_RES = true
         CONFIG_SCREEN_WIDTH = 853.33
         CONFIG_SCREEN_HEIGHT = 640
-        return 1.0, 1.0
+        -- NOTE we will just check the physics resolution, won't change the scale 
+        -- return 1.0, 1.0
     end
 end

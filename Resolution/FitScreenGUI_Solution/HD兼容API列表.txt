@@ -1,7 +1,7 @@
 **HD 兼容列表**
 图片/伴生资源
 display.newSprite(filename, x, y, params)
-display.newScale9Sprite(filename, x, y, size)
+display.newScale9Sprite(filename, x, y, size)       -- TODO 找出原因 HD中需要将size放大两倍.. 
 display.newTilesSprite(filename, rect)
 display.newTiledBatchNode(filename, plistFile, size, hPadding, vPadding)
 display.newMaskedSprite(__mask, __pic)    ---- 处理图片之后返回的是CCSprite, 确认scale
@@ -16,10 +16,25 @@ display.removeSpriteFrameByImageName(imageName)
 display.newBatchNode(image, capacity)
 display.newSpriteFrame(frameName)
 display.newFrames(pattern, begin, length, isReversed)  -- 在pattern前面加
+display.newProgressTimer(image, progresssType)      -- 内部虽然创建了一个sprite但又用其ContentSize设置了progress的ContentSize，所以创建出之后要再scale(1)一次
+
+ui.newTTFLabel(params)      -- hd下字号为sd的两倍 (params.size)
+ui.newBMFontLabel(params)   -- fnt文件需要加res前缀 (params.font) 另外字体fnt文件需要美术做两份
+ui.newLabelAtlas(text, charImage, charWidth, charHeight, byteOfStartChar)        -- TODO [扩展API] LabelAtlas的资源路径需要修改 同样要做scale
 
 **属性**
-Node.scale(scale)
-Caps
+Node:scale(scale)     -- HD版所有scale缩小0.5
+Node:cap(x,y,w,h)     -- [扩展API] cap是一个扩展方法
+Node:size(w, h)       -- 需要对Scale9单独扩大尺寸
 
+
+TODO "所有scale缩小0.5" 明显不适用于非Sprite节点，做测试，做区区分 （包括动画,如果对Node使用动画,结束时尺寸是否正确 ）
 
 TODO setContentSize 如何影响一张图片的尺寸 ???
+
+TODO getContentSize 在尺寸设计是需要用到，但是它返回了不同的值
+
+getContentSize() 注释为获得不应用父级变换时的尺寸，因为适配方案中，HD版本必然有缩放(默认0.5)
+这个接口能够获得真实图片尺寸，还是不要改动得好
+
+如果要获得应用父级变换后的"设计"尺寸，应该使用getBoundingBox().size

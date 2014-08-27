@@ -3,6 +3,8 @@ local UIScrollView = class("UIScrollView", function()
 	return cc.ClippingRegionNode:create()
 end)
 
+UIScrollView.BG_ZORDER 				= -100
+
 UIScrollView.DIRECTION_BOTH			= 0
 UIScrollView.DIRECTION_VERTICAL		= 1
 UIScrollView.DIRECTION_HORIZONTAL	= 2
@@ -29,14 +31,44 @@ function UIScrollView:ctor(params)
 		self.sbV = display.newScale9Sprite(params.scrollbarImgV, 100):addTo(self)
 	end
 
+	self:addBgColorIf(params)
+	self:addBgGradientColorIf(params)
+
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(...)
 			self:update_(...)
 		end)
 end
 
+function UIScrollView:addBgColorIf(params)
+	if not params.bgColor then
+		return
+	end
+
+	-- display.newColorLayer(params.bgColor)
+	cc.LayerColor:create(params.bgColor)
+		:size(params.viewRect.width, params.viewRect.height)
+		:pos(params.viewRect.x, params.viewRect.y)
+		:addTo(self, UIScrollView.BG_ZORDER)
+		:setTouchEnabled(false)
+end
+
+function UIScrollView:addBgGradientColorIf(params)
+	if not params.bgStartColor or not params.bgEndColor then
+		return
+	end
+
+	local layer = cc.LayerGradient:create(params.bgStartColor, params.bgEndColor)
+		:size(params.viewRect.width, params.viewRect.height)
+		:pos(params.viewRect.x, params.viewRect.y)
+		:addTo(self, UIScrollView.BG_ZORDER)
+		:setTouchEnabled(false)
+	layer:setVector(params.bgVector)
+end
+
 function UIScrollView:setViewRect(rect)
 	self:setClippingRegion(rect)
 	self.viewRect_ = rect
+	self.viewRectIsNodeSpace = false
 
 	return self
 end
@@ -59,6 +91,47 @@ function UIScrollView:setDirection(dir)
 	self.direction = dir
 
 	return self
+end
+
+-- 重置位置,主要用在纵向滚动时,
+function UIScrollView:resetPosition()
+	if UIScrollView.DIRECTION_VERTICAL ~= self.direction then
+		return
+	end
+
+	local x = self.viewRect_.x
+	local y = self.viewRect_.y
+	local bound = self.scrollNode:getCascadeBoundingBox()
+	local anchor = self.scrollNode:getAnchorPoint()
+	y = y + self.viewRect_.height - bound.height
+	x = x + bound.width*anchor.x
+	y = y + bound.height*anchor.y
+	self.scrollNode:setPosition(x, y)
+end
+
+function UIScrollView:isItemInViewRect(item)
+	if "userdata" ~= type(item) then
+		item = nil
+	end
+
+	if not item then
+		print("UIScrollView - isItemInViewRect item is not right")
+		return
+	end
+
+	local bound = item:getCascadeBoundingBox()
+	-- local point = cc.p(bound.x, bound.y)
+	-- local parent = item
+	-- while true do
+	-- 	parent = parent:getParent()
+	-- 	point = parent:convertToNodeSpace(point)
+	-- 	if parent == self.scrollNode then
+	-- 		break
+	-- 	end
+	-- end
+	-- bound.x = point.x
+	-- bound.y = point.y
+	return cc.rectIntersectsRect(self:getViewRectInWorldSpace(), bound)
 end
 
 function UIScrollView:addScrollNode(node)
@@ -89,12 +162,12 @@ end
 function UIScrollView:calcLayoutPadding()
 	local boundBox = self.scrollNode:getCascadeBoundingBox()
 
-	self.layoutPadding.left = boundBox:getMinX() - self.actualRect_:getMinX()
+	self.layoutPadding.left = boundBox.x - self.actualRect_.x
 	self.layoutPadding.right =
-		self.actualRect_:getMinX() + self.actualRect_.size.width - boundBox:getMinX() - boundBox.size.width
-	self.layoutPadding.top = boundBox:getMinY() - self.actualRect_:getMinY()
+		self.actualRect_.x + self.actualRect_.width - boundBox.x - boundBox.width
+	self.layoutPadding.top = boundBox.y - self.actualRect_.y
 	self.layoutPadding.bottom =
-		self.actualRect_:getMinY() + self.actualRect_.size.height - boundBox:getMinY() - boundBox.size.height
+		self.actualRect_.y + self.actualRect_.height - boundBox.y - boundBox.height
 end
 
 function UIScrollView:update_(dt)
@@ -102,9 +175,8 @@ function UIScrollView:update_(dt)
 end
 
 function UIScrollView:onTouch_(event)
-
-	if "began" == event.name and not self.viewRect_:containsPoint(ccp(event.x, event.y)) then
-		-- printInfo("#DEBUG touch didn't in viewRect")
+	if "began" == event.name and not self:isTouchInViewRect(event) then
+		printInfo("#DEBUG touch didn't in viewRect")
 		return false
 	end
 
@@ -113,13 +185,13 @@ function UIScrollView:onTouch_(event)
 		self.prevY_ = event.y
 		self.bDrag_ = false
 		local x,y = self.scrollNode:getPosition()
-		--self.position_ = {x = x, y = y}
-		self.position_ = ccp(x, y)
+		self.position_ = {x = x, y = y}
 
 		transition.stopTarget(self.scrollNode)
 		self:callListener_{name = "began", x = event.x, y = event.y}
 
 		self:enableScrollBar()
+		-- self:changeViewRectToNodeSpaceIf()
 
 		return true
 	elseif "moved" == event.name then
@@ -151,6 +223,21 @@ function UIScrollView:onTouch_(event)
 	end
 end
 
+function UIScrollView:isTouchInViewRect(event)
+	-- dump(self.viewRect_, "viewRect:")
+	local viewRect = self:convertToWorldSpace(cc.p(self.viewRect_.x, self.viewRect_.y))
+	viewRect.width = self.viewRect_.width
+	viewRect.height = self.viewRect_.height
+	-- dump(viewRect, "new viewRect:")
+
+	return cc.rectContainsPoint(viewRect, cc.p(event.x, event.y))
+end
+
+function UIScrollView:isTouchInScrollNode(event)
+	local cascadeBound = self:getScrollNodeRect()
+	return cc.rectContainsPoint(cascadeBound, cc.p(event.x, event.y))
+end
+
 function UIScrollView:scrollTo(p, y)
 	local x_, y_
 	if "table" == type(p) then
@@ -161,7 +248,7 @@ function UIScrollView:scrollTo(p, y)
 		y_ = y
 	end
 
-	self.position_ = ccp(x_, y_)
+	self.position_ = cc.p(x_, y_)
 	self.scrollNode:setPosition(self.position_)
 end
 
@@ -171,80 +258,9 @@ function UIScrollView:scrollBy(x, y)
 	self.scrollNode:setPosition(self.position_)
 
 	if self.actualRect_ then
-		--self.actualRect_.x = self.actualRect_.x + x
-		--self.actualRect_.y = self.actualRect_.y + y
-
-		self.actualRect_.origin.x = self.actualRect_.origin.x + x
-		self.actualRect_.origin.y = self.actualRect_.origin.y + y
+		self.actualRect_.x = self.actualRect_.x + x
+		self.actualRect_.y = self.actualRect_.y + y
 	end
-end
-
-function UIScrollView:calcScrollRange()
-	--先计算出container的position x,y方向上的可变范围,后面拖动时可以直接用
-	--拖动时是可以大于或小于这个范围的，只是拖动结束自动回到这个范围中来，回到哪一边的值，最近原则
-
-	self.rect = self.scrollNode:getCascadeBoundingBox()
-	if not self.positionRange_ then
-		self.positionRange_ = {}
-	end
-	if self.viewRect_.size.width < self.rect.size.width then
-		self.positionRange_.minX = self.viewRect_.size.width - self.rect.size.width
-		self.positionRange_.maxX = 0
-	else
-		self.positionRange_.minX = 0
-		self.positionRange_.maxX = 0
-	end
-	if self.viewRect_.size.height < self.rect.size.height then
-		self.positionRange_.minY = self.viewRect_.size.height - self.rect.size.height
-		self.positionRange_.maxY = 0
-	else
-		self.positionRange_.minY = self.viewRect_.size.height - self.rect.size.height
-		self.positionRange_.maxY = self.viewRect_.size.height - self.rect.size.height
-	end
-	self.positionRange_.minX = self.positionRange_.minX + self.viewRect_:getMinX()
-	self.positionRange_.maxX = self.positionRange_.maxX + self.viewRect_:getMinX()
-	self.positionRange_.minY = self.positionRange_.minY + self.viewRect_:getMinY()
-	self.positionRange_.maxY = self.positionRange_.maxY + self.viewRect_:getMinY()
-
-	-- anchorpoint
-	local anchor = self.scrollNode:getAnchorPoint()
-	local size = self.scrollNode:getCascadeBoundingBox()
-	self.positionRange_.minX = self.positionRange_.minX + anchor.x * size.size.width
-	self.positionRange_.maxX = self.positionRange_.maxX + anchor.x * size.size.width
-	self.positionRange_.minY = self.positionRange_.minY + anchor.y * size.size.height
-	self.positionRange_.maxY = self.positionRange_.maxY + anchor.y * size.size.height
-
-	dump(anchor, "anchor:")
-	-- dump(self.viewRect_, "viewRect_:")
-	-- dump(self.positionRange_, "positionRange:")
-end
-
-function UIScrollView:scrollAuto1()
-	self:calcScrollRange()
-
-	local newX, newY = self.position_.x, self.position_.y
-	if self.position_.x < self.positionRange_.minX then
-		newX = self.positionRange_.minX
-	elseif self.position_.x > self.positionRange_.maxX then
-		newX = self.positionRange_.maxX
-	else
-		--do nothing
-	end
-
-	if self.position_.y < self.positionRange_.minY then
-		newY = self.positionRange_.minY
-	elseif self.position_.y > self.positionRange_.maxY then
-		newY = self.positionRange_.maxY
-	else
-		-- do nothing
-	end
-
-	transition.moveTo(self.scrollNode,
-		{x = newX, y = newY, time = 0.3,
-		easing = "backout",
-		onComplete = function()
-			self:callListener_{name = "scrollEnd"}
-		end})
 end
 
 function UIScrollView:scrollAuto()
@@ -254,6 +270,7 @@ function UIScrollView:scrollAuto()
 	self:elasticScroll()
 end
 
+-- fast drag
 function UIScrollView:twiningScroll()
 	if self:isSideShow() then
 		-- printInfo("UIScrollView - side is show, so elastic scroll")
@@ -267,7 +284,7 @@ function UIScrollView:twiningScroll()
 	end
 
 	transition.moveBy(self.scrollNode,
-		{x = self.speed.x*10, y = self.speed.y*10, time = 0.3,
+		{x = self.speed.x*6, y = self.speed.y*6, time = 0.3,
 		easing = "sineOut",
 		onComplete = function()
 			self:elasticScroll()
@@ -277,19 +294,20 @@ end
 function UIScrollView:elasticScroll()
 	local cascadeBound = self:getScrollNodeRect()
 	local disX, disY = 0, 0
+	local viewRect = self:getViewRectInWorldSpace()
 
 	-- dump(cascadeBound, "UIScrollView - cascBoundingBox:")
 	-- dump(self.scrollNode:getBoundingBox(), "UIScrollView - BoundingBox:")
 
-	if cascadeBound:getMinX() > self.viewRect_:getMinX() then
-		disX = self.viewRect_:getMinX() - cascadeBound:getMinX()
-	elseif cascadeBound:getMinX() + cascadeBound.size.width < self.viewRect_:getMinX() + self.viewRect_.size.width then
-		disX = self.viewRect_:getMinX() + self.viewRect_.size.width - cascadeBound:getMinX() - cascadeBound.size.width
+	if cascadeBound.x > viewRect.x then
+		disX = viewRect.x - cascadeBound.x
+	elseif cascadeBound.x + cascadeBound.width < viewRect.x + viewRect.width then
+		disX = viewRect.x + viewRect.width - cascadeBound.x - cascadeBound.width
 	end
-	if cascadeBound:getMinY() > self.viewRect_:getMinY() then
-		disY = self.viewRect_:getMinY() - cascadeBound:getMinY()
-	elseif cascadeBound:getMinY() + cascadeBound.size.height < self.viewRect_:getMinY() + self.viewRect_.size.height then
-		disY = self.viewRect_:getMinY() + self.viewRect_.size.height - cascadeBound:getMinY() - cascadeBound.size.height
+	if cascadeBound.y > viewRect.y then
+		disY = viewRect.y - cascadeBound.y
+	elseif cascadeBound.y + cascadeBound.height < viewRect.y + viewRect.height then
+		disY = viewRect.y + viewRect.height - cascadeBound.y - cascadeBound.height
 	end
 
 	if 0 == disX and 0 == disY then
@@ -314,13 +332,22 @@ function UIScrollView:getScrollNodeRect()
 	return bound
 end
 
+function UIScrollView:getViewRectInWorldSpace()
+	local rect = self:convertToWorldSpace(
+		cc.p(self.viewRect_.x, self.viewRect_.y))
+	rect.width = self.viewRect_.width
+	rect.height = self.viewRect_.height
+
+	return rect
+end
+
 -- 是否显示到边缘
 function UIScrollView:isSideShow()
 	local bound = self.scrollNode:getCascadeBoundingBox()
-	if bound:getMinX() > self.viewRect_:getMinX()
-		or bound:getMinY() > self.viewRect_:getMinY()
-		or bound:getMinX() + bound.size.width < self.viewRect_:getMinX() + self.viewRect_.size.width
-		or bound:getMinY() + bound.size.height < self.viewRect_:getMinY() + self.viewRect_.size.height then
+	if bound.x > self.viewRect_.x
+		or bound.y > self.viewRect_.y
+		or bound.x + bound.width < self.viewRect_.x + self.viewRect_.width
+		or bound.y + bound.height < self.viewRect_.y + self.viewRect_.height then
 		return true
 	end
 
@@ -331,6 +358,7 @@ function UIScrollView:callListener_(event)
 	if not self.scrollListener_ then
 		return
 	end
+	event.scrollView = self
 
 	self.scrollListener_(event)
 end
@@ -342,15 +370,15 @@ function UIScrollView:enableScrollBar()
 		transition.stopTarget(self.sbV)
 		self.sbV:setOpacity(128)
 		local size = self.sbV:getContentSize()
-		if self.viewRect_.size.height < bound.size.height then
-			local barH = self.viewRect_.size.height*self.viewRect_.size.height/bound.size.height
+		if self.viewRect_.height < bound.height then
+			local barH = self.viewRect_.height*self.viewRect_.height/bound.height
 			if barH < size.width then
 				-- 保证bar不会太小
 				barH = size.width
 			end
-			self.sbV:setContentSize(CCSizeMake(size.width, barH))
+			self.sbV:setContentSize(size.width, barH)
 			self.sbV:setPosition(
-				self.viewRect_:getMinX() + self.viewRect_.size.width - size.width/2, self.viewRect_:getMinY() + barH/2)
+				self.viewRect_.x + self.viewRect_.width - size.width/2, self.viewRect_.y + barH/2)
 		end
 	end
 	if self.sbH then
@@ -358,14 +386,14 @@ function UIScrollView:enableScrollBar()
 		transition.stopTarget(self.sbH)
 		self.sbH:setOpacity(128)
 		local size = self.sbH:getContentSize()
-		if self.viewRect_.size.width < bound.size.width then
-			local barW = self.viewRect_.size.width*self.viewRect_.size.width/bound.size.width
+		if self.viewRect_.width < bound.width then
+			local barW = self.viewRect_.width*self.viewRect_.width/bound.width
 			if barW < size.height then
 				barw = size.height
 			end
-			self.sbH:setContentSize(CCSizeMake(barW, size.height))
-			self.sbH:setPosition(self.viewRect_:getMinX() + barW/2,
-				self.viewRect_:getMinY() + size.height/2)
+			self.sbH:setContentSize(barW, size.height)
+			self.sbH:setPosition(self.viewRect_.x + barW/2,
+				self.viewRect_.y + size.height/2)
 		end
 	end
 end
@@ -402,8 +430,8 @@ function UIScrollView:drawScrollBar()
 		self.sbV:setVisible(true)
 		local size = self.sbV:getContentSize()
 
-		local posY = (self.viewRect_:getMinY() - bound:getMinY())*(self.viewRect_.size.height - size.height)/(bound.size.height - self.viewRect_.size.height)
-			+ self.viewRect_:getMinY() + size.height/2
+		local posY = (self.viewRect_.y - bound.y)*(self.viewRect_.height - size.height)/(bound.height - self.viewRect_.height)
+			+ self.viewRect_.y + size.height/2
 		local x, y = self.sbV:getPosition()
 		self.sbV:setPosition(x, posY)
 	end
@@ -411,8 +439,8 @@ function UIScrollView:drawScrollBar()
 		self.sbH:setVisible(true)
 		local size = self.sbH:getContentSize()
 
-		local posX = (self.viewRect_:getMinX() - bound:getMinX())*(self.viewRect_.size.width - size.width)/(bound.size.width - self.viewRect_.size.width)
-			+ self.viewRect_:getMinX() + size.width/2
+		local posX = (self.viewRect_.x - bound.x)*(self.viewRect_.width - size.width)/(bound.width - self.viewRect_.width)
+			+ self.viewRect_.x + size.width/2
 		local x, y = self.sbH:getPosition()
 		self.sbH:setPosition(posX, y)
 	end
@@ -424,12 +452,22 @@ function UIScrollView:addScrollBarIf()
 		self.sb = cc.DrawNode:create():addTo(self)
 	end
 
-drawNode = cc.DrawNode:create()
+	drawNode = cc.DrawNode:create()
     drawNode:drawSegment(points[1], points[2], radius, borderColor)
 end
 
-function UIScrollView:getScrollNode()
-    return self.scrollNode
+function UIScrollView:changeViewRectToNodeSpaceIf()
+	if self.viewRectIsNodeSpace then
+		return
+	end
+
+	-- local nodePoint = self:convertToNodeSpace(cc.p(self.viewRect_.x, self.viewRect_.y))
+	local posX, posY = self:getPosition()
+	local ws = self:convertToWorldSpace(cc.p(posX, posY))
+	self.viewRect_.x = self.viewRect_.x + ws.x
+	self.viewRect_.y = self.viewRect_.y + ws.y
+	self.viewRectIsNodeSpace = true
+	print("htl changeViewRectToNodeSpaceIf()")
 end
 
 return UIScrollView

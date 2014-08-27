@@ -1,0 +1,25 @@
+info face="微软雅黑" size=32 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1 outline=0
+common lineHeight=32 base=26 scaleW=512 scaleH=512 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="nature_0.png"
+chars count=21
+char id=20041 x=0     y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=20161 x=51    y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=20449 x=102   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=21191 x=153   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=22904 x=204   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=23041 x=255   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=24544 x=306   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=24694 x=357   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=24935 x=408   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=26234 x=459   y=0     width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=26541 x=0     y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=27589 x=51    y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=27602 x=102   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=28113 x=153   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=31036 x=204   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=33395 x=255   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=33804 x=306   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=35946 x=357   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=36132 x=408   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=38887 x=459   y=51    width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15
+char id=39578 x=0     y=102   width=50    height=50    xoffset=0     yoffset=0     xadvance=50    page=0  chnl=15

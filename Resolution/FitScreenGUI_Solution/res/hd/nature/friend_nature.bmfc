@@ -1,0 +1,77 @@
+# AngelCode Bitmap Font Generator configuration file
+fileVersion=1
+
+# font settings
+fontName=微软雅黑
+fontFile=
+charSet=0
+fontSize=32
+aa=1
+scaleH=100
+useSmoothing=1
+isBold=0
+isItalic=0
+useUnicode=1
+disableBoxChars=1
+outputInvalidCharGlyph=0
+dontIncludeKerningPairs=0
+useHinting=1
+renderFromOutline=0
+useClearType=1
+
+# character alignment
+paddingDown=0
+paddingUp=0
+paddingRight=0
+paddingLeft=0
+spacingHoriz=1
+spacingVert=1
+useFixedHeight=0
+forceZero=0
+
+# output file
+outWidth=512
+outHeight=512
+outBitDepth=32
+fontDescFormat=0
+fourChnlPacked=0
+textureFormat=png
+textureCompression=0
+alphaChnl=1
+redChnl=0
+greenChnl=0
+blueChnl=0
+invA=0
+invR=0
+invG=0
+invB=0
+
+# outline
+outlineThickness=0
+
+# selected chars
+chars=20041,20161,20449,21191,22904,23041,24544,24694,24935,26234,26541,27589,27602,28113,31036,33395
+chars=33804,35946,36132,38887,39578
+
+# imported icon images
+icon="friend_071.png",24544,0,0,0
+icon="friend_072.png",20041,0,0,0
+icon="friend_073.png",31036,0,0,0
+icon="friend_074.png",26234,0,0,0
+icon="friend_075.png",20449,0,0,0
+icon="friend_076.png",21191,0,0,0
+icon="friend_077.png",24694,0,0,0
+icon="friend_064.png",27602,0,0,0
+icon="friend_065.png",39578,0,0,0
+icon="friend_066.png",35946,0,0,0
+icon="friend_067.png",33804,0,0,0
+icon="friend_068.png",33395,0,0,0
+icon="friend_069.png",28113,0,0,0
+icon="friend_070.png",24935,0,0,0
+icon="friend_057.png",23041,0,0,0
+icon="friend_058.png",26541,0,0,0
+icon="friend_059.png",36132,0,0,0
+icon="friend_060.png",27589,0,0,0
+icon="friend_061.png",22904,0,0,0
+icon="friend_062.png",20161,0,0,0
+icon="friend_063.png",38887,0,0,0

@@ -97,6 +97,7 @@ local scale, scaleX, scaleY
 if CONFIG_SCREEN_AUTOSCALE then
     if type(CONFIG_SCREEN_AUTOSCALE_CALLBACK) == "function" then
         scaleX, scaleY = CONFIG_SCREEN_AUTOSCALE_CALLBACK(w, h, device.model)
+        print("the scalex and scaley should be : ", scaleX, scaleY)
     end
 
     if not scaleX or not scaleY then
@@ -109,6 +110,7 @@ if CONFIG_SCREEN_AUTOSCALE then
     elseif CONFIG_SCREEN_AUTOSCALE == "FIXED_HEIGHT" then
         scale = scaleY
         CONFIG_SCREEN_WIDTH = w / scale
+        print("config with is : ", CONFIG_SCREEN_WIDTH)
     else
         scale = 1.0
         printError(string.format("display - invalid CONFIG_SCREEN_AUTOSCALE \"%s\"", CONFIG_SCREEN_AUTOSCALE))
@@ -849,6 +851,7 @@ local shape3 = display.newRect(CCRect(50, 80, 200, 100))
 function display.newRect(width, height, params)
     local x, y = 0, 0
     if type(width) == "userdata" then
+        params = height
         local t = tolua.type(width)
         if t == "CCRect" then
             x = width.origin.x
@@ -866,7 +869,7 @@ function display.newRect(width, height, params)
 
     local rect = CCRectShape:create(CCSize(width, height))
 	local align=display.CENTER
-	if type(height) == "table" then params = hight end
+	-- if type(height) == "table" then params = hight end
 	if type(params) == "table" then
 		x = params.x or x
 		y = params.y or y
