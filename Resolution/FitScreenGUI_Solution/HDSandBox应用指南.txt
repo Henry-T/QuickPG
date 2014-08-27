@@ -1,0 +1,67 @@
+
+
+**加载和初始化**
+在MyApp.lua
+
+require("config")
+require("framework.init")
+后面加上
+
+-- SD-HD 兼容
+HDSandBox = require("HDSandBox")
+HDSandBox:TurnOn()      -- 启动自动兼容HD模式
+
+
+**在config.lua中检测屏幕**
+HD_RES = false
+CONFIG_SCREEN_AUTOSCALE_CALLBACK = function(w, h, deviceModel)
+    if h == 1536 and w == 2048 then
+        HD_RES = true
+        CONFIG_SCREEN_WIDTH = 853.33
+        CONFIG_SCREEN_HEIGHT = 640
+        -- NOTE we will just check the physics resolution, won't change the scale 
+        -- return 1.0, 1.0
+
+
+**替换依赖getContentSize的逻辑**
+比如，在BattleScene.lua中有
+
+    self._bg:pos(self._bg:getContentSize().width / 2, display.cy)
+    self._mg:pos(self._mg:getContentSize().width / 2, display.cy)
+    self._fg:pos(self._fg:getContentSize().width / 2, 740 / 2, 0)
+
+替换为
+
+    self._bg:pos(self._bg:getBoundingBox().size.width / 2, display.cy)
+    self._mg:pos(self._mg:getBoundingBox().size.width / 2, display.cy)
+    self._fg:pos(self._fg:getBoundingBox().size.width / 2, display.cy)
+    
+**sprite、label相关函数应该调用SandBox版本，而不是CC**:create版本**
+
+
+**将setCapInsets()改为新增的Node:cap(x,y,w,h)**
+例如 PanelWarriorList.lua
+
+    display.newScale9Sprite("ui/general_001.png", display.cx, display.cy):size(766, 475):addTo(self):setCapInsets(CCRect(90, 90, 10, 10))
+
+    改为 
+
+    display.newScale9Sprite("ui/general_001.png", display.cx, display.cy):size(766, 475):addTo(self):cap(90, 90, 10, 10)
+
+
+这个API因为Quick没有封装，调用的地方很多
+
+**重新组织sd和hd版本资源**
+
+sd/hd  |
+       | battleBg
+       | nums
+       | skills
+       | ui
+
+图片/Atlas文字图直接做两种尺寸
+BMFont需要改过参数重新导出
+
+
+
+

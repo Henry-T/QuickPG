@@ -23,6 +23,7 @@ local Node = c.Node
 -- a node extension without HD handling
 function Node:cap(x, y, w, h)
     self:setCapInsets(CCRect(x, y, w, h))
+    return self
 end
 
 -- factory function for CCLabelAtlas (HD incompatible version)
