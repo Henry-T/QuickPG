@@ -11,7 +11,9 @@ end)
 function PanelTest:ctor()
     self._isShowing = false
 
-    self._widget = GUIReader:shareReader():widgetFromJsonFile("res/ListTempleteGUI/PanelTest.json")
+    self._widget = GUIReader:shareReader():widgetFromJsonFile("res/ListTempleteGUI/NewUi_1.json")
+    -- self._widget = GUIReader:shareReader():widgetFromJsonFile("res/ListTempleteGUI/PanelTest.json")
+    --self._widget = GUIReader:shareReader():widgetFromJsonFile("res/ListTempleteGUI/cocosgui/CocoGUI_PageView_Sample.json")
     self:addWidget(self._widget)
     
     self._lstTest = self._widget:getChildByName("lstTest")
@@ -28,6 +30,7 @@ function PanelTest:ctor()
 end
 
 function PanelTest:addTest(data)
+    print("test clone !")
     --local widgetTest = GUIReader:shareReader():widgetFromJsonFile("res/ListTempleteGUI/widgetTest.json")
     local widgetTest = self._tplTest:clone()
     local peer = tolua.getpeer(self._tplTest)
@@ -48,7 +51,7 @@ function PanelTest:addTest(data)
 
     widgetTest._data = data
     widgetTest._lbName:setText("hello!")
-    self._lstTest:pushBackCustomItem(widgetTest)
+    -- self._lstTest:pushBackCustomItem(widgetTest)
     
 
     -- QxGEN_CUSTOM_LIST_ADD_BEGIN Test

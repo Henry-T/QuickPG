@@ -1,26 +1,27 @@
 <?xml version="1.0"?>
 <UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProjectDir>E:\proj\QuickCocosPG\Structure\ListTemplete\ListTempleteGUI</ProjectDir>
-  <Version>1.5.0.0</Version>
-  <Resources>E:\proj\QuickCocosPG\Structure\ListTemplete\ListTempleteGUI\Resources</Resources>
+  <ProjectDir>E:\proj\QuickXPG\Structure\ListTemplete\ListTempleteGUI</ProjectDir>
+  <Version>1.5.0.1</Version>
+  <Resources>E:\proj\QuickXPG\Structure\ListTemplete\ListTempleteGUI\Resources</Resources>
   <Name>ListTempleteGUI</Name>
   <JsonFileName>ListTempleteGUI.json</JsonFileName>
-  <JsonFolder>E:\proj\QuickCocosPG\Structure\ListTemplete\ListTempleteGUI\Json</JsonFolder>
+  <JsonFolder>E:\proj\QuickXPG\Structure\ListTemplete\ListTempleteGUI\Json</JsonFolder>
   <JsonList>
     <string>PanelTest.json</string>
     <string>WidgetTest.json</string>
   </JsonList>
   <CanvasSize>
-    <Width>0</Width>
-    <Height>0</Height>
+    <Width>200</Width>
+    <Height>50</Height>
   </CanvasSize>
-  <filePath>E:\proj\QuickCocosPG\Structure\ListTemplete\ListTempleteGUI\ListTempleteGUI.xml.ui</filePath>
+  <filePath>E:\proj\QuickXPG\Structure\ListTemplete\ListTempleteGUI\ListTempleteGUI.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>
   <ResRelativePath />
   <imageFileList />
   <imagePngList>
+    <string>logo.png</string>
     <string>GUI/button.png</string>
   </imagePngList>
   <JsonSuffix>.json</JsonSuffix>
-  <CurrentUIJson>WidgetTest.json</CurrentUIJson>
+  <CurrentUIJson>PanelTest.json</CurrentUIJson>
 </UIProject>
