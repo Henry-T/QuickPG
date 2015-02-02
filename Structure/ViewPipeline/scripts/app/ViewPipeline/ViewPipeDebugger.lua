@@ -79,5 +79,9 @@ function ViewPipeDebugger:refresh()
 	-- end
 end
 
+function ViewPipeDebugger:close()
+	self:removeFromParent()
+end
+
 
 return ViewPipeDebugger

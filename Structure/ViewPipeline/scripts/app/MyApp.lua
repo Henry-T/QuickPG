@@ -1,11 +1,12 @@
 
 require("config")
 require("frameworkClone.init")
-
+require("Object")
 require("app.utils.QuickExt")
 
 require("app.data.CompanyData")
 
+global = {}
 
 viewPipe = require("app.ViewPipeline.ViewPipeline").new()
 

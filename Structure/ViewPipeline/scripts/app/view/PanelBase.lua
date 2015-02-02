@@ -62,6 +62,24 @@ function PanelBase:getTypeName()
   return self.__cname
 end
 
+-- virtual
+function PanelBase:saveState()
+    local persist = {}
+    for k, v in pairs(self._data) do 
+        persist[k] = v
+    end
+    return persist
+end
+
+-- virtual
+function PanelBase:loadState(persist)
+    self._data = {}
+    for k,v in pairs(persist) do
+        self._data[k] = v
+    end
+    global.inspector:SetTarget(self._data)
+end
+
 --- 添加一条面板状态记录
 -- 每次从一个面板主动Move到另一个面板时，即将关闭的面板应该调用pushState
 -- 因为以类名为Key，所以使用状态记录的面板类名应当不同

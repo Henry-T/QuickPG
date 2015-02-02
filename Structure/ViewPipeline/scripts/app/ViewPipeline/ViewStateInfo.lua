@@ -14,15 +14,18 @@ function ViewStateInfo:ctor(viewName, mode, parent)
 	self._mode = mode
 	self._instance = nil
 	self._parent = parent
+	self._persist = {}		-- 寄存数据 关闭的时候赋值，再次实例化时自动恢复
 	self:createView()
 end
 
-function ViewStateInfo:createView()
-	-- dump(self._viewName)
+function ViewStateInfo:createView(loadState)
 	local viewClass = require("app.view."..self._viewName)
 	self._instance = viewClass.new()
 	if self._instance.show and type(self._instance.show) == "function" then
 		self._instance:show(self._parent)
+	end
+	if loadState and self._instance.loadState and type(self._instance.loadState) == "function" then
+		self._instance:loadState(self._persist)
 	end
 end
 
@@ -34,6 +37,9 @@ end
 
 function ViewStateInfo:destroyView()
 	if self._instance then
+		if self._instance.saveState and type(self._instance.saveState) == "function" then
+			self._persist = self._instance:saveState()
+		end
 		if self._instance.close and type(self._instance.close) == "function" then
 			self._instance:close()
 		end

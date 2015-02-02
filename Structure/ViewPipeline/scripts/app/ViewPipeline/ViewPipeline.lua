@@ -74,7 +74,7 @@ function ViewPipeline:back()
 		if self._stateInfoStack[#self._stateInfoStack]._instance then
 			self._stateInfoStack[#self._stateInfoStack]:refreshView()
 		else
-			self._stateInfoStack[#self._stateInfoStack]:createView()
+			self._stateInfoStack[#self._stateInfoStack]:createView(true)
 		end
 	end
 

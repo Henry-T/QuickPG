@@ -37,9 +37,6 @@ function Node:add(child, zorder, tag)
 end
 
 function Node:addTo(target, zorder, tag)
-    if not target or not target.addChild then
-        printError("target is nil!")
-    end
     target:addChild(self, zorder or 0, tag or 0)
     return self
 end

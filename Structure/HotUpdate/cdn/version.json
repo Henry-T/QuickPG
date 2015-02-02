@@ -1,0 +1,8 @@
+{
+	"version": "1.0",  // 当前版本
+	"resources":[
+		{"path":"res/lib/framework_precompiled.zip", "md5":"123123123123123123"}, // 代码包不支持增量更新，都是整包更新
+		{"path":"res/lib/quickExt.zip", "md5":"123123123123123123"},
+		{"path":"res/ui/bg.png", "md5":"123123123123123123"},
+	]
+}

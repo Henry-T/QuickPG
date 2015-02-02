@@ -30,6 +30,10 @@ function Node:color(color)
     return self
 end
 
+--- Node Event
+-- for k,v in pairs(Object) do
+--     Node[k] = v
+-- end
 
 -- cc(Node):addComponent("components.behavior.EventProtocol"):exportMethods()
 

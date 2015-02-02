@@ -6,6 +6,7 @@
 local ViewPipeline = require("app.ViewPipeline.ViewPipeline")
 local ViewStateInfo = require("app.ViewPipeline.ViewStateInfo")
 local Button = require("app.view.Button")
+local Inspector = require("app.Inspector.Inspector")
 
 local ViewPipeTestScene = class("ViewPipeTestScene", function()
     return display.newScene("ViewPipeTestScene")
@@ -50,6 +51,17 @@ function ViewPipeTestScene:ctor()
     viewPipe:setViewNode(display.newNode():addTo(self))
     viewPipe:setDebugNode(display.newNode():addTo(self))
     viewPipe:showDebugger(true)
+
+    local inspector = Inspector.new()
+        :pos(display.width-180, display.height - 30)
+        :addTo(self)
+    -- local data = {
+    --     name = "Jim",
+    --     midName = "X",
+    --     address = "MNOP",
+    -- }
+    -- inspector:SetTarget(data)
+    global.inspector = inspector
 end
 
 function ViewPipeTestScene:onEnter()
