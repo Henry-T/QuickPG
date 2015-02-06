@@ -10,7 +10,7 @@ require("mvc.patterns.observer.Notification")
 
 local Facade = class("Facade")
 
-function Facade.Instance()
+function Facade.getInstance()
 	if not Facade.instance then
 		Facade.instance = Facade.new()
 	end
@@ -35,21 +35,21 @@ function Facade:initializeController()
 	if not self._controller then
 		return
 	end
-	self._controller = Controller.Instance()
+	self._controller = Controller.getInstance()
 end
 
 function Facade:initializeModel()
 	if not self._model then
 		return 
 	end
-	self._model = Model.Instance()
+	self._model = Model.getInstance()
 end
 
 function Facade:initializeView()
 	if not self._view then
 		return 
 	end
-	self._view = View.Instance()
+	self._view = View.getInstance()
 end
 
 function Facade:RegisterCommand(noteName, cmdClass)
@@ -98,7 +98,7 @@ function Facade:HasMediator( mediatorName )
 	return self._view.hasMediator( mediatorName )
 end
 
-function Facade:SendNotification( notificationName, body, type ) 
+function Facade:sendNotification( notificationName, body, type ) 
 	self:notifyObservers(Notification.new(notificationName, body, type) )
 end
 

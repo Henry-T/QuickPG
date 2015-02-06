@@ -9,7 +9,7 @@ local Facade = require("mvc.patterns.facade.Facade")
 
 local ApplicationFacade = class("ApplicationFacade", Facade)
 
-function ApplicationFacade.Instance()
+function ApplicationFacade.getInstance()
 	if ApplicationFacade.instance == nil then
 		ApplicationFacade.instance = ApplicationFacade.new()
 	end
@@ -17,20 +17,21 @@ function ApplicationFacade.Instance()
 end
 
 function ApplicationFacade:ctor()
-	ApplicationFacade.super.ctor(self)
+	ApplicationFacade.super.ctor(self, 1)
 end
 
 -- protected
 function ApplicationFacade:initializeController()
 	ApplicationFacade.super.initializeController(self)
-	self:RegisterCommand(AppConstants.STARTUP, StartupCommand)
+	self:registerCommand(AppConstants.STARTUP, StartupCommand)
 
 	-- register the rest of commands...
 
 end
 
-function ApplicationFacade:StartUp(app)
-	self:SendNotification(AppConstants.STARTUP, app)
+function ApplicationFacade:startUp(app)
+	print("sendNote AppConstants.STARTUP")
+	self:sendNotification(AppConstants.STARTUP, app)
 end
 
 return ApplicationFacade

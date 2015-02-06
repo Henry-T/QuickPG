@@ -27,10 +27,11 @@ local MyApp = class("MyApp", cc.mvc.AppBase)
 function MyApp:ctor()
     MyApp.super.ctor(self)
 
-    self._facade = ApplicationFacade.Instance()
+    self._facade = ApplicationFacade.getInstance()
 end
 
 function MyApp:run()
+	self._facade:startUp(self)
 
 	-- CCFileUtils:sharedFileUtils():addSearchPath("res/")
  --    self:enterScene("MainScene")

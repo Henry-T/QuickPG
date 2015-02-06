@@ -3,15 +3,17 @@
 -- Date: 2015-02-02 15:35:09
 --
 
-local StartupCommand = class("StartupCommand")
+local SimpleCommand = require("mvc.patterns.command.SimpleCommand")
 
-function StartupCommand:Execute(note)
-	local storyArchitectApp = note:GetBody()
+local StartupCommand = class("StartupCommand", SimpleCommand)
+
+function StartupCommand:execute(note)
+	local storyArchitectApp = note:getBody()
 
 	-- Register the Proxys
 
 	-- Register the Mediators
-
+	print("execute StartupCommand")
 end
 
 return StartupCommand
