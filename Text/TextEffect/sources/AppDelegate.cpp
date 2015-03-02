@@ -39,8 +39,16 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCLuaStack *pStack = pEngine->getLuaStack();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+
+
     // load framework
     pStack->loadChunksFromZIP("res/framework_precompiled.zip");
+
+    // load game
+    pStack->setXXTEAKeyAndSign("apowo2014", 9, "XXTEA", 5);
+    pStack->loadChunksFromZIP("res/game.zip");
+    pStack->executeString("require 'main'");
+    return true;
 
     // set script path
     string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("scripts/main.lua");
@@ -83,7 +91,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     CCLOG("LOAD LUA FILE: %s", path.c_str());
     CCLOG("------------------------------------------------");
     pEngine->executeScriptFile(path.c_str());
-
+    CCLOG("=====================hanxu testin ===========222");
     return true;
 }
 
