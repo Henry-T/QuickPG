@@ -17,8 +17,12 @@ end
 if #indexs > 5 then
 	local index = indexs[#indexs-4]
 	local libPath = string.sub(curPath, 1, index).."Library/?.lua"
+	print(libPath)
 	package.path = package.path .. ' ;'..libPath	
 end
+
+require("LuaStlExt")
+require("QuickXExt")
 
 local ApplicationFacade = require("app.ApplicationFacade")
 
