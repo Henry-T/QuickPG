@@ -1,3 +1,5 @@
+/.metadata
+.metadata/
 objs-debug/
 veryfirstcocos/proj.android/assets/res/
 veryfirstcocos/proj.android/obj/
