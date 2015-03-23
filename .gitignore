@@ -1,6 +1,10 @@
 /.metadata
 .metadata/
 objs-debug/
+obj/
+bin/
+libs/
+gen/
 veryfirstcocos/proj.android/assets/res/
 veryfirstcocos/proj.android/obj/
 veryfirstcocos/proj.win32/Debug/

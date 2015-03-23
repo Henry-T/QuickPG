@@ -49,7 +49,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     
     // set script path
     string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("scripts/main.lua");
-
 #else
     // load framework
     if (m_projectConfig.isLoadPrecompiledFramework())
