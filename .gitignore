@@ -43,3 +43,4 @@ Thumbs.db
 /Library/frameworkClone/cocos2dx/ObjectBinding.lua
 /Resolution/FitScreenGUI_Solution/scripts/xd/cocos2dx/ObjectBinding.lua
 /Misc/veryfirstcocos/proj.android/obj/local/armeabi/objs-debug/cocos_extension_static/CocoStudio/Trigger/ObjectFactory.o.d
+/Misc/veryfirstcocos/proj.win32/*.sdf
