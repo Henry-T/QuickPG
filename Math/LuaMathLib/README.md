@@ -1,22 +1,25 @@
-个人版Lua语言数学库
-
-Quick-x在这个项目中，仅用作输出测试，以及数学绘图
-
-雄心：个人数学库一方面加速开发，另一方面需要有可移植性，来测试各种语言、平台的数学功能。
-
-误区：并非重造轮子，而是加深自己对游戏数学的理解。因此平台支持的数学方法，只做个封装
+纯Lua实现的通用数学游戏库
+- API源自Unity和XNA，加入了扩展方法及组合用法
+- 对接两大流行游戏引擎，采用Unity3D的习惯，在Quick-Cocos2d-x中编写数学代码
 
 
-灵光一闪
-- Bye到角         Math.DeltaAngle(current, target)
-- 浮点数的"余数"  Math.Repeat() 居然随处可见导出在用
-- SmoothDamp系函数 应当找到源码
-- Lua的小数取余对我非常有用 考虑做一种全平台实现 但它跟取余取模都没有关系
-- SmoothDamp带有加速阶段，使得动画非常平滑
-- Unity数学库有一个特点，各处考虑的OverShoot的情况，看来这是游戏中经常要处理的（领悟）
-- 编写过程中，发现很多Lua语法精华，metatable的控制，周全的class实现等等
+指导方针
+- 吸收各种平台的特点，将它们融合后应用回去
+- 可轻松移植到任何支持面向对象的语言
+- 无任何依赖
 
-直观展示
-- 生成噪点图
-- 轮盘运动 -> 旋转木马
-- 碰撞检测（需要有Size/Widget类）
+现有功能
+- UnityEngine.Mathf 类大部分移植
+- UnityEngine.Vector2 类大部分移植
+- UnityEngine.Vector3 类大部分移植
+
+待办事项
+- 支持UnityEngine.Vector4
+- 支持UnityEngine.Quaterion
+- 支持UnityEngine.Matrix4x4
+
+愿景
+- 轻量级Tween Engine
+- 轻量级"物理引擎"
+
+-- TODO 支持Color及颜色空间转换

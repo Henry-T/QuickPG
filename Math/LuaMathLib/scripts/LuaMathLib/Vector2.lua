@@ -10,24 +10,11 @@ function Vector2:ctor(x, y)
     self.y = y or 0
 end
 
---- [[Static Fields]]
--- kEpsilon = 1E-06;
-
---- [[Fields]]
-
 function Vector2:__index(index)
     if index == 0 then
         return self.x
     elseif index == 1 then
         return self.y
-    elseif index == "one" then
-        return Vector2.new(1, 1)
-    elseif index == "zero" then
-        return Vector2.new(0, 0)
-    elseif index == "right" then
-        return Vector2.new(1, 0)
-    elseif index == "up" then
-        return Vector2.new(0, 1)
     elseif index == "magnitude" then
         return Math.Sqrt(self.x * self.x + self.y * self.y)
     elseif index == "normalized" then
@@ -41,6 +28,24 @@ function Vector2:__index(index)
     end
 end
 
+local MetaVector2 = {}
+
+function MetaVector2:__index(index)
+    if index == "one" then
+        return Vector2.new(1, 1)
+    elseif index == "zero" then
+        return Vector2.new(0, 0)
+    elseif index == "right" then
+        return Vector2.new(1, 0)
+    elseif index == "up" then
+        return Vector2.new(0, 1)
+    else 
+        return rawget(self, index)
+    end
+end
+
+setmetatable(Vector2, MetaVector2)
+
 function Vector2:__newindex(index, value)
     if index == 0 then
         self.x = value
@@ -50,7 +55,6 @@ function Vector2:__newindex(index, value)
         rawset(self, index, value)
     end
 end
-
 
 function Vector2.SqrMagnitude (vec2)
   return self.x * self.x + self.y * self.y;
@@ -138,7 +142,7 @@ end
 
 function Vector2:Normalize ()
     local magnitude = self.magnitude;
-    if magnitude > 1E-06 then
+    if magnitude > 1E-05 then
         self = self / magnitude;
     else
         self = Vector2.zero;

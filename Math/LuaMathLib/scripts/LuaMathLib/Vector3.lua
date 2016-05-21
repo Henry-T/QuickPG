@@ -28,7 +28,15 @@ function Vector3:__index(index)
         return Vector3.Magnitude(self)
     elseif index == "normalized" then
         return Vector3.Normalize(self)
-    elseif index == "one" then
+    else
+        return rawget(self, index)
+    end
+end
+
+local MetaVector3 = {}
+
+function MetaVector3:__index(index)
+    if index == "one" then
         return Vector3.new(1,1,1)
     elseif index == "zero" then
         return Vector3.new(0,0,0)
@@ -48,6 +56,8 @@ function Vector3:__index(index)
         return rawget(self, index)
     end
 end
+
+setmetatable(Vector3, MetaVector3)
 
 function Vector3:__newindex(index, value)
     if index == 0 then

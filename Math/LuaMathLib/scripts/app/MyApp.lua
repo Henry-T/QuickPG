@@ -9,7 +9,7 @@ Vector2 = require("LuaMathLib.Vector2")
 Vector3 = require("LuaMathLib.Vector3")
 Vector4 = require("LuaMathLib.Vector4")
 Quaternion = require("LuaMathLib.Quaternion")
-Matrix = require("LuaMathLib.Matrix4x4")
+Matrix4x4 = require("LuaMathLib.Matrix4x4")
 
 print("=============================")
 print("Math测试")
@@ -32,19 +32,19 @@ print("\n")
 print("=============================")
 print("Vector4测试")
 print("=============================")
--- require("MathTest.Vector4Test")
+require("MathTest.Vector4Test")
 print("\n")
 
 print("=============================")
 print("Quaternion测试")
 print("=============================")
--- require("MathTest.QuaternionTest")
+require("MathTest.QuaternionTest")
 print("\n")
 
 print("=============================")
 print("Matrix测试")
 print("=============================")
--- require("MathTest.MatrixTest")
+require("MathTest.MatrixTest")
 print("\n")
 
 
@@ -56,7 +56,7 @@ end
 
 function MyApp:run()
     CCFileUtils:sharedFileUtils():addSearchPath("res/")
-    -- self:enterScene("MainScene")
+    self:enterScene("MainScene")
 end
 
 return MyApp

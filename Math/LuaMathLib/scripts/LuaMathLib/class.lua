@@ -11,21 +11,25 @@ function class(classname, super)
     local cls
 
     if superType ~= "function" and superType ~= "table" then
+        print("!! 进入")
         superType = nil
         super = nil
     end
 
     if superType == "function" or (super and super.__ctype == 1) then
+        print("!! 跳过")
         -- inherited from native C++ Object
         --print("inherite from c++")
         cls = {}
 
         if superType == "table" then
+            print("!! 分支2/1 选择1")
             -- copy fields from super
             for k,v in pairs(super) do cls[k] = v end
             cls.__create = super.__create
             cls.super    = super
         else
+            print("!! 分支2/1 选择2")
             cls.__create = super
             cls.ctor = function() end
         end
@@ -43,13 +47,17 @@ function class(classname, super)
         end
 
     else
+        print("!! 进入")
+
         --print("inherite from lua")
         -- inherited from Lua Object
         if super then
+            print("!! 跳过")
             cls = {}
             setmetatable(cls, {__index = super})
             cls.super = super
         else
+            print("!! 进入")
             cls = {ctor = function() end}
         end
 
@@ -61,12 +69,15 @@ function class(classname, super)
             local instance = setmetatable({}, cls)
 
             -- dump(cls)
-            for i, v in pairs(cls) do
-                instance[i] = v
-            end
+            --if super == nil then
+                for i, v in pairs(cls) do
+                    instance[i] = v
+                end
+            --end
 
             --instance.class = cls
-            -- dump(instance)
+              --  print("测试构造参数 ", cls.__cname, ...)
+
             instance:ctor(...)
             return instance
         end

@@ -35,7 +35,7 @@ end
 
 --- 是否近似相等
 function Math.Approximately(a, b)
-    return Math.Abs (b - a) < Math.Max (1E-06 * Math.Max (Math.Abs (a), Math.Abs (b)), 1.121039E-44);
+    return Math.Abs (b - a) < Math.Max (1E-05 * Math.Max (Math.Abs (a), Math.Abs (b)), 1.121039E-44);
 end
 
 --- [[三角函数]]
@@ -60,8 +60,8 @@ function Math.Atan(tanOfRad)
 end
 
 --- 反正切获得弧度
-function Math.Atan2(x, y)
-    return math.atan2(y/x)
+function Math.Atan2(y, x)
+    return math.atan2(y, x)
 end
 
 --- 大于参数的最小整数

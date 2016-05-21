@@ -7,7 +7,7 @@
 local Vector4 = class("Vector4")
 
 --- [[Static Fields]]
--- kEpsilon = 1E-06;
+-- kEpsilon = 1E-05;
 
 function Vector4:ctor(x, y, z, w)
     self.x = x or 0
@@ -25,18 +25,30 @@ function Vector4:__index(index)
         return self.z
     elseif index == 3 then
         return self.w
-    elseif index == "one" then
-        return Vector4.new(1,1,1,1)
-    elseif index == "zero" then
-        return Vector4.new(0,0,0,0)
     elseif index == "magnitude" then
         return Math.Sqrt(Vector4.Dot(self, self))
     elseif index == "normalized" then
         return Vector4.Normalize (self)
     elseif index == "sqrMagnitude" then
         return Vector4.Dot (self, self);
+    else
+        return rawget(self, index)
     end
 end
+
+local MetaVector4 = {}
+
+function MetaVector4:__index(index)
+    if index == "one" then
+        return Vector4.new(1,1,1,1)
+    elseif index == "zero" then
+        return Vector4.new(0,0,0,0)
+    else
+        return rawget(self, index)
+    end
+end
+
+setmetatable(Vector4, MetaVector4)
 
 function Vector4:__newindex(index, value)
     if index == 0 then
@@ -47,6 +59,8 @@ function Vector4:__newindex(index, value)
         self.z = value
     elseif index == 3 then
         self.w = value
+    else
+        return rawset(self, index, value)
     end
 end
 
@@ -87,7 +101,7 @@ end
 
 function Vector4.Normalize (a)
     local num = Vector4.Magnitude (a);
-    if (num > 1E-06) then
+    if (num > 1E-05) then
         return a / num;
     end
     return Vector4.zero;
@@ -120,18 +134,11 @@ end
 
 function Vector4:Normalize()
     local num = Vector4.Magnitude (self);
-    if (num > 1E-06) then
+    if (num > 1E-05) then
         self = self / num;
     else
         self = Vector4.zero;
     end
-end
-
-function Vector4:Scale(scale)
-    self.x = self.x * scale.x;
-    self.y = self.y * scale.y;
-    self.z = self.z * scale.z;
-    self.w = self.w * scale.w;
 end
 
 function Vector4:Set (new_x, new_y, new_z, new_w)
@@ -139,10 +146,6 @@ function Vector4:Set (new_x, new_y, new_z, new_w)
     self.y = new_y;
     self.z = new_z;
     self.w = new_w;
-end
-
-function Vector4:SqrMagnitude ()
-    return Vector4.Dot (self, self);
 end
 
 function Vector4:__tostring()
@@ -183,6 +186,10 @@ end
 
 function Vector4.__unm(a)
     return Vector4.new (-a.x, -a.y, -a.z, -a.w);
+end
+
+function Vector4.__concat(a, b)
+    return tostring(a)..tostring(b)
 end
 
 return Vector4
