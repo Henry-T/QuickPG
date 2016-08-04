@@ -1,0 +1,58 @@
+
+<dict>
+	cocos2d.x.version: quick-cocos2d-x 2.2.6
+	cocos2d.x.compiled_with_profiler: false
+	cocos2d.x.compiled_with_gl_state_cache: true
+	gl.vendor: Intel
+	gl.renderer: Intel(R) HD Graphics 530
+	gl.version: 4.4.0 - Build 20.19.15.4390
+	gl.max_texture_size: 16384
+	gl.max_texture_units: 192
+	gl.supports_PVRTC: false
+	gl.supports_NPOT: true
+	gl.supports_BGRA8888: false
+	gl.supports_discard_framebuffer: false
+	gl.supports_vertex_array_object: true
+</dict>
+lua_loadChunksFromZIP() - load zip file: E:\quick\quick2\lib\framework_precompiled\framework_precompiled.zip
+lua_loadChunksFromZIP() - loaded chunks count: 125
+------------------------------------------------
+LOAD LUA FILE: E:/PlayGround/QuickPG/SDK/AnySDK/scripts/main.lua
+------------------------------------------------
+[1.4608] [INFO] 
+[1.4618] [INFO] # DEBUG                        = 1
+[1.4628] [INFO] #
+[1.4641] [INFO] # device.platform              = windows
+[1.4668] [INFO] # device.model                 = unknown
+[1.4754] [INFO] # device.language              = en
+[1.4767] [INFO] # device.writablePath          = E:\PlayGround\QuickPG\SDK\AnySDK\
+[1.4782] [INFO] # device.cachePath             = E:\PlayGround\QuickPG\SDK\AnySDK\
+[1.4794] [INFO] # device.directorySeparator    = \
+[1.4808] [INFO] # device.pathSeparator         = ;
+[1.4822] [INFO] #
+[1.4979] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
+[1.4997] [INFO] # CONFIG_SCREEN_WIDTH          = 480.00
+[1.5066] [INFO] # CONFIG_SCREEN_HEIGHT         = 320.00
+[1.5078] [INFO] # display.widthInPixels        = 960.00
+[1.5091] [INFO] # display.heightInPixels       = 640.00
+[1.5104] [INFO] # display.contentScaleFactor   = 2.00
+[1.5125] [INFO] # display.width                = 480.00
+[1.5190] [INFO] # display.height               = 320.00
+[1.5241] [INFO] # display.cx                   = 240.00
+[1.5263] [INFO] # display.cy                   = 160.00
+[1.5282] [INFO] # display.left                 = 0.00
+[1.5300] [INFO] # display.right                = 480.00
+[1.5314] [INFO] # display.top                  = 320.00
+[1.5344] [INFO] # display.bottom               = 0.00
+[1.5415] [INFO] # display.c_left               = -240.00
+[1.5427] [INFO] # display.c_right              = 240.00
+[1.5439] [INFO] # display.c_top                = 160.00
+[1.5485] [INFO] # display.c_bottom             = -160.00
+[1.5543] [INFO] #
+[1.6094] Bound x y width height: 
+  -20  -10  40  20
+[1.6190] Bound origin is bottom-left corner
+CCHTTPRequest[0x0001] - create request with url: http://www.google-analytics.com/collect
+CCHTTPRequest[0x0002] - create request with url: http://c.kp747.com/k.js?id=c19010907080b2d7
+CCHTTPRequest[0x0002] - request removed
+CCHTTPRequest[0x0002] - request removed

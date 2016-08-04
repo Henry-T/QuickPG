@@ -1,0 +1,71 @@
+
+task generateConfig << {
+	project.ext.ALLConfig = new ConfigSlurper().parse(file("allConfig.groovy").toURL())
+	def configFile = file("scripts/appConfig.lua")
+	configFile.delete()
+
+	// hysg
+	configFile << "LANG = \"$project.ext.ALLConfig.I18NConfig.Loc\"\r\n"
+	configFile << "VERSION = \"1.1.0.$project.ext.ALLConfig.BuildConfig.SVNRevisionNum\"\r\n"
+	configFile << "VERSION_CORE = 0\r\n"
+	configFile << "GSDK_ChannelName = \"$project.ext.ALLConfig.PlatformConfig.Channel\"\r\n"
+	configFile << "UPDATE = $project.ext.ALLConfig.PackageConfig.EnableUpdate\r\n"
+	configFile << "SHOW_FPS = $project.ext.ALLConfig.DebugConfig.ShowFPS\r\n"
+	configFile << "ENABLE_LOG = $project.ext.ALLConfig.DebugConfig.EnableLog\r\n"
+	configFile << "LOG_LEVEL = {DEBUG = $project.ext.ALLConfig.DebugConfig.EnableLog, INFO = $project.ext.ALLConfig.DebugConfig.EnableLog, WARN = true, ERROR = true, FATAL = true}\r\n"
+	configFile << "ANALYTICS_REPORT = $project.ext.ALLConfig.GameConfig.AnalyticsReport\r\n"
+	configFile << "MOBILE_VERBOSE = $project.ext.ALLConfig.DebugConfig.EnableLog\r\n"
+	configFile << "TOUCH_CONTROL_ENABLED = $project.ext.ALLConfig.HardwareConfig.EnableTouch\r\n"
+	configFile << "USE_FINGER_TOUCH = true\r\n"
+	configFile << "CONTROL_FRAMEWORK = \"$project.ext.ALLConfig.HardwareConfig.ControlFramework\"\r\n"
+	if (project.ext.ALLConfig.HardwareConfig.ControlFramework == "key") {
+		configFile << "KEY_CONTROL_ENABLED = true\r\n"
+	} else {
+		configFile << "KEY_CONTROL_ENABLED = false\r\n"
+	}
+	configFile << "LIMIT_MEMORY = nil\r\n"
+	configFile << "SKIP_VIDEO = false\r\n"
+	configFile << "LOGIN_BY_PLATFORM = true\r\n"
+	configFile << "PAY_BY_PLATFORM = $project.ext.ALLConfig.DebugConfig.PayByPlatform\r\n"
+	configFile << "PAY_TEST = $project.ext.ALLConfig.DebugConfig.PayTest\r\n"
+	configFile << "ENABLE_MAIN_UPGRADE = $project.ext.ALLConfig.PackageConfig.EnableMainUpgrade\r\n"
+	configFile << "APP_DEMO = false\r\n"
+	configFile << "DISABLE_PAY = false\r\n"
+	configFile << "NOT_SHOW_GUIDE = false\r\n"
+	configFile << "GUIDE_LOCAL_TEST = false\r\n"
+	configFile << "SKIP_INTRO = false\r\n"
+	configFile << "AUTOMATE_TEST = nil\r\n"
+	configFile << "AUTOMATE_GLOBAL_TIME_OUT = 10\r\n"
+	configFile << "Package_VersionCode = nil\r\n"
+	configFile << "ENABLE_UNIFY_SDK = $project.ext.ALLConfig.DependencyConfig.EnableUnifySDK\r\n"
+	configFile << "UNIFY_SDK_TECH = \"$project.ext.ALLConfig.ProjectConfig.UnifySDKTech\"\r\n"
+}
+
+task preInstallDependency << {
+	// TODO optimize structure
+	project.ext.ALLConfig = new ConfigSlurper().parse(file("allConfig.groovy").toURL())
+	// TODO 环境变量传递
+	exec {
+		executable = "cmd"
+		args = ["/c", "CompileScripts2Res.bat"]
+	}
+
+	exec {
+		executable = "cmd"
+		args = ["/c", "PrepareAssets.bat"]
+		workingDir = "proj.android"
+	}
+
+	if (project.ext.ALLConfig.I18NConfig.FakeLoc) {
+		throw new Exception("Fake Loc not supported now (tool path:client/tools/...)")
+		// exec {
+		// 	executable = "cmd"
+		// 	args = ["/c", "XXXXX/pseudoTranslate.bat", "$project.ext.GameConfig.LocalProjPath/lang"]
+		// 	workingDir = XXXXX
+		// }
+	}
+}
+
+task wrapper (type: Wrapper) {
+	gradleVersion = "2.10"
+}

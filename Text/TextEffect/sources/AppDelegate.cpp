@@ -45,7 +45,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pStack->loadChunksFromZIP("res/framework_precompiled.zip");
 
     // load game
-    pStack->setXXTEAKeyAndSign("apowo2014", 9, "XXTEA", 5);
+    pStack->setXXTEAKeyAndSign("lolofinil", 9, "XXTEA", 5);
     pStack->loadChunksFromZIP("res/game.zip");
     pStack->executeString("require 'main'");
     return true;

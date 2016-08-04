@@ -1,0 +1,1 @@
+adb install proj.android/bin/game-debug.apk
